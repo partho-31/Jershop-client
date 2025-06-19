@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Order History</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+  <div class="max-w-5xl mx-auto px-4 py-10">
+    <!-- Page Title -->
+    <div class="mb-10 text-center">
+      <h1 class="text-3xl font-bold">Order History</h1>
+      <p class="text-gray-500">Review your past orders here</p>
+    </div>
+
+    <!-- Orders List -->
+    <div class="space-y-6">
+      <!-- Order Card -->
+      <div class="bg-white shadow-sm rounded-xl p-6">
+        <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-4">
+          <div>
+            <h2 class="text-lg font-semibold">Order #MIN456789</h2>
+            <p class="text-sm text-gray-500">Placed on June 10, 2025</p>
+          </div>
+          <div class="mt-2 sm:mt-0">
+            <span class="px-3 py-1 rounded-full text-sm bg-yellow-100 text-yellow-800">Processing</span>
+          </div>
+        </div>
+
+        <!-- Order Summary -->
+        <div class="flex items-center justify-between border-t border-gray-100 pt-4">
+          <div>
+            <p class="text-sm text-gray-600">2 items</p>
+            <p class="font-medium text-gray-800">Total: $235.44</p>
+          </div>
+          <a href="#" class="text-blue-600 hover:underline text-sm font-medium">View Details</a>
+        </div>
+      </div>
+
+      <!-- Another Order Card -->
+      <div class="bg-white shadow-sm rounded-xl p-6">
+        <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-4">
+          <div>
+            <h2 class="text-lg font-semibold">Order #MIN123456</h2>
+            <p class="text-sm text-gray-500">Placed on May 25, 2025</p>
+          </div>
+          <div class="mt-2 sm:mt-0">
+            <span class="px-3 py-1 rounded-full text-sm bg-green-100 text-green-800">Delivered</span>
+          </div>
+        </div>
+
+        <!-- Order Summary -->
+        <div class="flex items-center justify-between border-t border-gray-100 pt-4">
+          <div>
+            <p class="text-sm text-gray-600">1 item</p>
+            <p class="font-medium text-gray-800">Total: $129.00</p>
+          </div>
+          <a href="#" class="text-blue-600 hover:underline text-sm font-medium">View Details</a>
+        </div>
+      </div>
+
+      <!-- Another Order Card -->
+      <div class="bg-white shadow-sm rounded-xl p-6">
+        <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-4">
+          <div>
+            <h2 class="text-lg font-semibold">Order #MIN654321</h2>
+            <p class="text-sm text-gray-500">Placed on April 15, 2025</p>
+          </div>
+          <div class="mt-2 sm:mt-0">
+            <span class="px-3 py-1 rounded-full text-sm bg-red-100 text-red-700">Cancelled</span>
+          </div>
+        </div>
+
+        <!-- Order Summary -->
+        <div class="flex items-center justify-between border-t border-gray-100 pt-4">
+          <div>
+            <p class="text-sm text-gray-600">3 items</p>
+            <p class="font-medium text-gray-800">Total: $310.00</p>
+          </div>
+          <a href="#" class="text-blue-600 hover:underline text-sm font-medium">View Details</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
