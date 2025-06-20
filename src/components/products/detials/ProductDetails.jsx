@@ -76,7 +76,7 @@ const ProductDetails = ({ product }) => {
             <h3 className="text-xs font-medium text-gray-500 uppercase tracking-wider">
               <FaBox className="inline mr-1" /> Category
             </h3>
-            <p className="text-gray-800 font-medium mt-1">{product?.category}</p>
+            <p className="text-gray-800 font-medium mt-1">{product?.category.name}</p>
           </div>
           <div className="bg-gray-50 p-3 rounded-lg">
             <h3 className="text-xs font-medium text-gray-500 uppercase tracking-wider">

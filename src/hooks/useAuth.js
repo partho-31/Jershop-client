@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import ApiClient from "../services/ApiClient";
 import AuthAPiClient from "../services/AuthApiClient";
+import { useNavigate } from "react-router";
 
 
 const useAuth = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate()
 
   const getToken = () => {
     const token = localStorage.getItem("authToken");
@@ -14,17 +16,28 @@ const useAuth = () => {
 
   const [authToken, setAuthToken] = useState(getToken());
 
-  const registration = async (data) => {
-    setLoading(true);
+   const registration = async (data) => {
+    setLoading(true)
     try {
-      const response = await ApiClient.post("/auth/users/", data);
-      console.log(response);
+      await ApiClient.post("/auth/users/", data);
     } catch (error) {
-      console.log("Error while Sign up", error);
+      console.log(error,"Registration Failed");
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
+    return { success: true, message : "Registration successful" };
   };
+
+
+  const activeAccViaEmail = async (uid,token)=> {
+    try {
+      await ApiClient.post('/auth/users/activation/',{uid,token})
+      return { success : true, message: "Account active successful"}
+    } catch (error) {
+      console.log(error)
+      return { success : false, message: "Activation failed"}
+    }
+  }
 
   const userProfile = async () => {
     setLoading(true);
@@ -39,13 +52,17 @@ const useAuth = () => {
   };
 
   const logIn = async (data) => {
+    setLoading(true);
     try {
       const response = await ApiClient.post("/auth/jwt/create/", data);
       setAuthToken(response.data);
       localStorage.setItem("authToken", JSON.stringify(response.data));
       userProfile();
+      navigate("/");
     } catch (error) {
       console.log("Error while fetching token", error);
+    }finally {
+      setLoading(false);
     }
   };
 
@@ -103,6 +120,7 @@ const useAuth = () => {
   return {
     user,
     registration,
+    activeAccViaEmail,
     userProfile,
     logIn,
     logOut,

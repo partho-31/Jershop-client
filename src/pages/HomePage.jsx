@@ -18,7 +18,7 @@ const HomePage = () => {
     });
   }, []);
 
-  const { productsList, latestProducts } = useFetchProducts();
+  const { productsList, latestProducts, loading } = useFetchProducts();
   return (
     <div className="bg-gray-50">
       {/* Hero Section */}
@@ -144,6 +144,11 @@ const HomePage = () => {
           </div>
 
           <div className="relative">
+            {loading && (
+              <div className="w-full flex justify-center">
+                <span className="loading loading-spinner text-info"></span>
+              </div>
+            )}
             <div className="flex overflow-x-auto pb-6 scrollbar-hide gap-6">
               {productsList.map((product) => (
                 <div key={product.id}>

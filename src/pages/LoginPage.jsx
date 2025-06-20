@@ -1,5 +1,5 @@
-// import  { useState } from 'react';
 import { useForm } from "react-hook-form";
+import useAuthContext from "../hooks/useAuthContext";
 
 const LoginPage = () => {
   const {
@@ -7,10 +7,10 @@ const LoginPage = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  //   const [showPassword, setShowPassword] = useState(false);
-  const loading = false;
+
+  const { logIn, loading } = useAuthContext();
   const onSubmit = (data) => {
-    console.log("Form submitted:", data);
+    logIn(data);
   };
 
   return (

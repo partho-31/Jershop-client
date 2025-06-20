@@ -1,5 +1,7 @@
 // import { useEffect, useState } from "react";
 import { FaStar, FaStarHalfAlt } from "react-icons/fa";
+import { RiStarFill, RiStarLine } from "react-icons/ri";
+
 
 const ReviewPage = ({ product }) => {
   // const [reviews, setReviews] = useState(null);
@@ -27,7 +29,7 @@ const ReviewPage = ({ product }) => {
         <h2 className="text-2xl font-bold text-gray-800">Customer Reviews</h2>
         <div className="flex items-center">
           {[...Array(5)].map((_, i) =>
-            i < product.ratings ? (
+            i < product?.ratings ? (
               <RiStarFill key={i} className="text-yellow-400" />
             ) : (
               <RiStarLine key={i} className="text-gray-300" />
