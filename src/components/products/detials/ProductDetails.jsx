@@ -17,10 +17,13 @@ import {
   FaWarehouse,
 } from "react-icons/fa";
 import { RiStarFill, RiStarLine } from "react-icons/ri";
+import useFetchCart from "../../../hooks/useFetchCart";
+
 
 
 const ProductDetails = ({ product }) => {
-  console.log(product)
+    const { addCartItems, loading } = useFetchCart();
+
   return (
     <div className="lg:w-1/2">
       <div className="bg-white rounded-xl shadow-lg overflow-hidden p-6 hover:shadow-xl transition-shadow duration-300">
@@ -96,14 +99,14 @@ const ProductDetails = ({ product }) => {
               <button className="px-3 py-1 bg-gray-100 hover:bg-gray-200 transition-colors">
                 <FaMinus className="text-gray-600" />
               </button>
-              <input
+              {/* <input
                 type="number"
                 id="quantity"
                 value="1"
                 min="1"
                 max="45"
                 className="w-12 text-center border-0 focus:ring-0 bg-white"
-              />
+              /> */}1
               <button className="px-3 py-1 bg-gray-100 hover:bg-gray-200 transition-colors">
                 <FaPlus className="text-gray-600" />
               </button>
@@ -122,7 +125,10 @@ const ProductDetails = ({ product }) => {
           <button className="flex-1 bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900 text-white py-3 px-6 rounded-lg font-medium transition-all duration-300 flex items-center justify-center shadow-md hover:shadow-lg">
             <FaBolt className="mr-2" /> Buy Now
           </button>
-          <button className="flex-1 bg-gray-900 hover:bg-gray-800 text-white py-3 px-6 rounded-lg font-medium transition-all duration-300 flex items-center justify-center shadow-md hover:shadow-lg">
+          <button onClick={() => {
+                addCartItems(product.id, 1);
+              }}
+              disabled={loading} className="flex-1 bg-gray-900 hover:bg-gray-800 text-white py-3 px-6 rounded-lg font-medium transition-all duration-300 flex items-center justify-center shadow-md hover:shadow-lg">
             <FaShoppingCart className="mr-2" /> Add to Cart
           </button>
         </div>

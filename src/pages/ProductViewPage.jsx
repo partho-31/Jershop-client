@@ -24,7 +24,7 @@ const ProductViewPage = () => {
     };
     getProduct(id);
   }, [id]);
-  console.log(loading)
+  
   return (
     <div className="bg-gray-50 min-h-screen">
       <div className="container mx-auto px-4 py-8">
@@ -55,7 +55,7 @@ const ProductViewPage = () => {
           </div>
           <div className="p-6 flex justify-center gap-10">
             <ReviewPage product={product} />
-            <ReviewForm />
+            <ReviewForm />{loading}
           </div>
         </div>
       </div>

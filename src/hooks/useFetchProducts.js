@@ -43,8 +43,7 @@ const useFetchProducts = () => {
     }
   };
 
- 
-  const updateProduct = async (id,data) => {
+  const updateProduct = async (id, data) => {
     setLoading(true);
     try {
       await AuthAPiClient.patch(`/api/products/${id}/`, data);
@@ -70,6 +69,7 @@ const useFetchProducts = () => {
 
   useEffect(() => {
     getProductsList();
+    getLatestProducts();
   }, []);
 
   return {

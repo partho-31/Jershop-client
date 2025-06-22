@@ -1,4 +1,3 @@
-import { FaMinus, FaPlus, FaTrashAlt } from "react-icons/fa";
 import OrderSummary from "../components/orders/summary/OrderSummary";
 import CartItem from "../components/cart/CartItem";
 

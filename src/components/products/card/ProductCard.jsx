@@ -19,25 +19,33 @@ const ProductCard = ({ product }) => {
           </div>
         </figure>
         <div className="card-body pt-2 pb-6">
+          <span className="inline-block px-3 py-1 text-xs font-semibold text-center text-gray-700 bg-gray-100 rounded-full mb-4">
+            {product?.category?.name} • Player Edition
+          </span>
           <h3 className="card-title text-lg font-semibold">{product.name}</h3>
-          <div className="flex items-center mt-1">
-            <div className="flex justify-center items-center text-yellow-400 text-lg pt-1">
-              {[...Array(5)].map((_, i) =>
-                i < product.ratings ? (
-                  <RiStarFill key={i} className="text-yellow-400" />
-                ) : (
-                  <RiStarLine key={i} className="text-gray-300" />
-                )
-              )}
+          <div className="flex items-center mb-1">
+              <div className="flex mr-2">
+                {[...Array(5)].map((_, i) =>
+                  i < product.ratings ? (
+                    <RiStarFill key={i} className="text-yellow-400 w-5 h-5" />
+                  ) : (
+                    <RiStarLine key={i} className="text-gray-300 w-5 h-5" />
+                  )
+                )}
+              </div>
+              <span className="text-sm text-gray-500">
+                ({product.reviewCount || "0"} reviews)
+              </span>
             </div>
-          </div>
           <div className="mt-1 flex justify-between items-center">
-            <span className="text-xl font-bold text-gray-900">
-              BDT {product.price}
-            </span>
-            <button className="btn btn-sm btn-primary bg-blue-600 border-none hover:bg-blue-700">
-              Add to Cart
-            </button>
+            <div className="flex items-center mb-6">
+              <p className="text-2xl font-extrabold text-gray-900">
+                BDT {product.final_price}
+              </p>
+              <span className="ml-2 text-md text-gray-500 line-through">
+                BDT {product.price}
+              </span>
+            </div>
           </div>
         </div>
       </div>

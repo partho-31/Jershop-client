@@ -50,14 +50,8 @@ const HomePage = () => {
             </a>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {/* Card of Products */}
-            {latestProducts.map((product) => (
-              <div className="" key={product.id}>
-                <LatestProductCard product={product} />
-              </div>
-            ))}
-          </div>
+          {/* Card of Products */}
+          <LatestProductCard product={latestProducts} />
         </div>
       </section>
 

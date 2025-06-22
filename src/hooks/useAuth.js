@@ -39,7 +39,7 @@ const useAuth = () => {
     }
   }
 
-  const userProfile = async () => {
+  const userProfile =  async () => {
     setLoading(true);
     try {
       const response = await AuthAPiClient.get("/auth/users/me/");
