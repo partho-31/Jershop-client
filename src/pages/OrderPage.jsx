@@ -1,4 +1,3 @@
-import React from "react";
 import OrderCard from "../components/orders/card/OrderCard";
 import { FaCheckCircle } from "react-icons/fa";
 
@@ -20,16 +19,16 @@ const OrderPage = () => {
       <OrderCard />
 
       {/* CTA Button  */}
-      <div class="mt-8 flex flex-col sm:flex-row justify-center gap-4">
+      <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4">
         <a
           href="/"
-          class="px-6 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition flex items-center justify-center"
+          className="px-6 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition flex items-center justify-center"
         >
           Back to Home
         </a>
         <a
           href="/orders"
-          class="px-6 py-2 border-2 border-gray-300 text-gray-700 rounded-lg font-medium hover:bg-gray-50 transition flex items-center justify-center"
+          className="px-6 py-2 border-2 border-gray-300 text-gray-700 rounded-lg font-medium hover:bg-gray-50 transition flex items-center justify-center"
         >
           View Order History
         </a>

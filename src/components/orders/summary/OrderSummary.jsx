@@ -1,7 +1,8 @@
-import useFetchCart from "../../../hooks/useFetchCart";
+import { Link } from "react-router";
+import useCartContext from "../../../hooks/useCartContext";
 
 const OrderSummary = () => {
-  const { cart } = useFetchCart()
+  const {cart} = useCartContext()
   return (
     <div className="md:w-1/3">
       <div className="bg-white p-6 rounded-lg shadow-sm sticky top-8">
@@ -9,7 +10,7 @@ const OrderSummary = () => {
         <div className="space-y-3 border-b border-[#e8e8e3] pb-4">
           <div className="flex justify-between">
             <span className="text-gray-500">Subtotal</span>
-            <span>{cart?.total_amount}</span>
+            <span>{cart?.total_amount || 0}</span>
           </div>
           <div className="flex justify-between">
             <span className="text-gray-500">Shipping</span>
@@ -30,9 +31,9 @@ const OrderSummary = () => {
         <div className="mt-4 text-center text-sm text-gray-500">
           <p>
             or{" "}
-            <a href="#" className="underline">
+            <Link to="products"><p className="underline">
               continue shopping
-            </a>
+            </p></Link>
           </p>
         </div>
       </div>

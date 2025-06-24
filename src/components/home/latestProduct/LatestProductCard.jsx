@@ -1,7 +1,6 @@
 import { RiStarFill, RiStarLine } from "react-icons/ri";
 
 const LatestProductCard = ({ product }) => {
-  console.log(product);
   return (
     <div className="w-full max-w-4xl mx-auto bg-white rounded-xl shadow-2xl overflow-hidden transition-all duration-300 hover:shadow-3xl hover:-translate-y-1">
       <div className="flex flex-col md:flex-row">

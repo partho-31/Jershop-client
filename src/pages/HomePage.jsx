@@ -5,9 +5,9 @@ import HeroSection from "../components/home/heroSec/HeroSection";
 import LatestProductCard from "../components/home/latestProduct/LatestProductCard";
 import CategoryCard from "../components/home/category/CategoryCard";
 import ProductCard from "../components/products/card/ProductCard";
-import { FaArrowRight, FaFire, FaTag } from "react-icons/fa";
+import {  FaTag } from "react-icons/fa";
 import LimitedAddition from "../components/home/limitedAddition.jsx/LimitedAddition";
-import useFetchProducts from "../hooks/useFetchProducts";
+import useProductsContext from "../hooks/useProductsContext";
 
 const HomePage = () => {
   useEffect(() => {
@@ -18,7 +18,7 @@ const HomePage = () => {
     });
   }, []);
 
-  const { productsList, latestProducts, loading } = useFetchProducts();
+  const {productsList, latestProducts, loading } = useProductsContext()
   return (
     <div className="bg-gray-50">
       {/* Hero Section */}

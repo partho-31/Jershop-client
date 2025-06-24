@@ -1,11 +1,11 @@
 import { FaSignInAlt, FaUserPlus } from "react-icons/fa";
 import { Link } from "react-router";
 import useAuthContext from "../hooks/useAuthContext";
-import useFetchCart from "../hooks/useFetchCart";
+import useCartContext from "../hooks/useCartContext";
 
 const Navbar = () => {
   const { user } = useAuthContext();
-  const {createOrGetCart,cart} = useFetchCart()
+  const {cart,createOrGetCart} = useCartContext()
     
   return (
     <div className="navbar bg-white py-4 shadow-lg  sm:px-8 ">
@@ -108,7 +108,7 @@ const Navbar = () => {
                     />{" "}
                   </svg>
                   <span className="badge badge-xs border-0 bg-gray-300 indicator-item">
-                    {cart?.total_items}
+                    {cart?.total_items || 0}
                   </span>
                 </div>
               </div>
@@ -117,8 +117,8 @@ const Navbar = () => {
                 className="card card-compact dropdown-content bg-base-100 z-1 mt-3 w-52 shadow"
               >
                 <div className="card-body">
-                  <span className="text-lg font-bold"> Items: {cart?.total_items}</span>
-                  <span className="text-info">Subtotal: {cart?.total_amount}</span>
+                  <span className="text-lg font-bold"> Items: {cart?.total_items || 0}</span>
+                  <span className="text-info">Subtotal: {cart?.total_amount || 0}</span>
                   <Link to="cart"><div className="card-actions">
                     <button className="btn btn-primary btn-block" onClick={createOrGetCart}>
                       View cart

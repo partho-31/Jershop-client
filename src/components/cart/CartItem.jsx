@@ -1,8 +1,8 @@
 import { FaMinus, FaPlus, FaTrashAlt } from "react-icons/fa";
-import useFetchCart from "../../hooks/useFetchCart";
+import useCartContext from "../../hooks/useCartContext";
 
 const CartItem = () => {
-  const { cartItems } = useFetchCart();
+  const {cartItems} = useCartContext()
   return (
     <div className="md:w-2/3">
       <div className="flex justify-between items-center mb-6">

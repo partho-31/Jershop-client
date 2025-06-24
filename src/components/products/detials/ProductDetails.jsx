@@ -17,12 +17,12 @@ import {
   FaWarehouse,
 } from "react-icons/fa";
 import { RiStarFill, RiStarLine } from "react-icons/ri";
-import useFetchCart from "../../../hooks/useFetchCart";
+import useCartContext from "../../../hooks/useCartContext";
 
 
 
 const ProductDetails = ({ product }) => {
-    const { addCartItems, loading } = useFetchCart();
+  const {addCartItems, loading} = useCartContext()
 
   return (
     <div className="lg:w-1/2">

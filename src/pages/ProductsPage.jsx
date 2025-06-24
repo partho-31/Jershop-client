@@ -1,9 +1,9 @@
 import ProductSearch from "../components/products/searchBar/ProductSearch";
 import ProductCard from "../components/products/card/ProductCard";
-import useFetchProducts from "../hooks/useFetchProducts";
+import useProductsContext from "../hooks/useProductsContext";
 
 const ProductsPage = () => {
-  const { productsList,loading } = useFetchProducts();
+  const {productsList,loading} = useProductsContext()
 
   return (
     <div>
