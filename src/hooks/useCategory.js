@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import ApiClient from "../services/ApiClient";
 import AuthAPiClient from "../services/AuthApiClient";
 
-const useFetchCategory = () => {
+const useCategory = () => {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -46,7 +46,7 @@ const useFetchCategory = () => {
     getCategories();
   }, []);
 
-  return { categories, createCategory, deleteCategory, loading };
+  return { categories, createCategory, deleteCategory,getCategories, loading };
 };
 
-export default useFetchCategory;
+export default useCategory;

@@ -1,16 +1,34 @@
 import { RiStarFill, RiStarLine } from "react-icons/ri";
+import useCartContext from "../../../hooks/useCartContext";
+import { toast } from "react-toastify";
+import { FaShoppingCart } from "react-icons/fa";
 
 const LatestProductCard = ({ product }) => {
+  const { addCartItems, loading } = useCartContext();
+
+  const handleAddToCart = async (id, quantity) => {
+    const response = await addCartItems(id, quantity);
+    if (response.success) {
+      toast.success("Item added to the cart!", {
+        position: "top-center",
+      });
+    }
+  };
+
   return (
     <div className="w-full max-w-4xl mx-auto bg-white rounded-xl shadow-2xl overflow-hidden transition-all duration-300 hover:shadow-3xl hover:-translate-y-1">
       <div className="flex flex-col md:flex-row">
-        {/* Product Image - Takes full height on desktop */}
-        <div className="md:w-1/2 h-80 md:h-auto overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
+        {/* Product Image - No white space */}
+        <div className="md:w-1/2 relative">
           <img
-            src={product?.images}
+            src="https://res.cloudinary.com/dvyz3blnz/image/upload/v1750795957/new_cristiano_ronaldo_al_nassr_1695738518_89ac811d_progressive_u8uyrw.jpg"
             alt={product.name}
-            className="w-full h-full object-contain transition-transform duration-500 hover:scale-110"
+            className="absolute inset-0 w-full h-full object-cover"
           />
+          <div className="pt-[66.66%] md:hidden" />{" "}
+          {/* Maintains aspect ratio on small screens */}
+          <div className="hidden md:block h-80" />{" "}
+          {/* Maintains height on md+ screens */}
         </div>
 
         {/* Product Content */}
@@ -38,11 +56,11 @@ const LatestProductCard = ({ product }) => {
                 )}
               </div>
               <span className="text-sm text-gray-500">
-                ({product.reviewCount || "0"} reviews)
+                ({product?.reviews?.length || "0"} reviews)
               </span>
             </div>
 
-            {/* Product Description - You might want to add this */}
+            {/* Product Description */}
             <p className="text-gray-600 mb-6">
               Premium quality jersey with moisture-wicking fabric and
               embroidered logos.
@@ -55,28 +73,24 @@ const LatestProductCard = ({ product }) => {
               <p className="text-3xl font-extrabold text-gray-900">
                 BDT {product.final_price}
               </p>
-
               <span className="ml-2 text-lg text-gray-500 line-through">
                 BDT {product.price}
               </span>
             </div>
 
             <div className="flex space-x-4">
-              <button className="flex-1 py-3 px-6 rounded-lg bg-gray-900 text-white font-bold hover:bg-gray-800 transition duration-200 flex items-center justify-center">
-                <span>Add to Cart</span>
-                <svg
-                  className="w-5 h-5 ml-2"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                  />
-                </svg>
+              <button
+                onClick={() => handleAddToCart(product.id, 1)}
+                disabled={loading}
+                className="flex-1 bg-gray-900 hover:bg-gray-800 text-white py-3 px-6 rounded-lg font-medium transition-all duration-300 flex items-center justify-center shadow-md hover:shadow-lg"
+              >
+                {loading ? (
+                  <span className="loading loading-spinner loading-md"></span>
+                ) : (
+                  <span className="flex items-center">
+                    <FaShoppingCart className="mr-2" /> Add to Cart
+                  </span>
+                )}
               </button>
             </div>
           </div>

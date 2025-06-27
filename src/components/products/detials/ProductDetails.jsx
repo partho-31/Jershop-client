@@ -18,11 +18,19 @@ import {
 } from "react-icons/fa";
 import { RiStarFill, RiStarLine } from "react-icons/ri";
 import useCartContext from "../../../hooks/useCartContext";
+import { toast } from "react-toastify";
 
+const ProductDetails = ({ product, rating }) => {
+  const { addCartItems, loading } = useCartContext();
 
-
-const ProductDetails = ({ product }) => {
-  const {addCartItems, loading} = useCartContext()
+  const handleAddToCart = async (id, quantity) => {
+    const response = await addCartItems(id, quantity);
+    if (response.success) {
+      toast.success("Item added to the cart!", {
+        position: "top-center",
+      });
+    }
+  };
 
   return (
     <div className="lg:w-1/2">
@@ -41,7 +49,7 @@ const ProductDetails = ({ product }) => {
                 )
               )}
               <span className="text-gray-600 text-sm font-medium">
-                {product?.ratings} (42 reviews)
+                ({rating} reviews)
               </span>
             </div>
           </div>
@@ -52,9 +60,11 @@ const ProductDetails = ({ product }) => {
 
         <div className="mb-6">
           <div className="flex items-center">
-            <span className="text-3xl font-bold text-gray-900">BDT {product?.final_price}</span>
+            <span className="text-3xl font-bold text-gray-900">
+              BDT {product?.final_price}
+            </span>
             <span className="text-lg text-gray-500 line-through ml-2">
-               {product?.price}
+              {product?.price}
             </span>
             <span className="bg-red-100 text-red-800 text-xs font-semibold ml-3 px-2 py-0.5 rounded-full">
               <FaTag className="inline mr-1" /> {product?.discount}% OFF
@@ -70,7 +80,10 @@ const ProductDetails = ({ product }) => {
             <FaAlignLeft className="mr-2 text-blue-500" /> Description
           </h2>
           <p className="text-gray-600 leading-relaxed">
-           {product?.description}
+            {product?.description} Lorem ipsum dolor sit amet consectetur
+            adipisicing elit. Eaque accusamus, architecto facilis minima qui
+            ipsa in accusantium ratione labore molestiae consectetur doloremque
+            deserunt laudantium itaque similique quisquam nisi rerum eum.
           </p>
         </div>
 
@@ -79,13 +92,17 @@ const ProductDetails = ({ product }) => {
             <h3 className="text-xs font-medium text-gray-500 uppercase tracking-wider">
               <FaBox className="inline mr-1" /> Category
             </h3>
-            <p className="text-gray-800 font-medium mt-1">{product?.category.name}</p>
+            <p className="text-gray-800 font-medium mt-1">
+              {product?.category.name}
+            </p>
           </div>
           <div className="bg-gray-50 p-3 rounded-lg">
             <h3 className="text-xs font-medium text-gray-500 uppercase tracking-wider">
               <FaWarehouse className="inline mr-1" /> Availability
             </h3>
-            <p className="text-gray-800 font-medium mt-1">{product?.stock} in stock</p>
+            <p className="text-gray-800 font-medium mt-1">
+              {product?.remaining} in stock
+            </p>
           </div>
 
           <div className="bg-gray-50 p-3 rounded-lg">
@@ -106,7 +123,8 @@ const ProductDetails = ({ product }) => {
                 min="1"
                 max="45"
                 className="w-12 text-center border-0 focus:ring-0 bg-white"
-              /> */}1
+              /> */}
+              1
               <button className="px-3 py-1 bg-gray-100 hover:bg-gray-200 transition-colors">
                 <FaPlus className="text-gray-600" />
               </button>
@@ -125,11 +143,18 @@ const ProductDetails = ({ product }) => {
           <button className="flex-1 bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900 text-white py-3 px-6 rounded-lg font-medium transition-all duration-300 flex items-center justify-center shadow-md hover:shadow-lg">
             <FaBolt className="mr-2" /> Buy Now
           </button>
-          <button onClick={() => {
-                addCartItems(product.id, 1);
-              }}
-              disabled={loading} className="flex-1 bg-gray-900 hover:bg-gray-800 text-white py-3 px-6 rounded-lg font-medium transition-all duration-300 flex items-center justify-center shadow-md hover:shadow-lg">
-            <FaShoppingCart className="mr-2" /> Add to Cart
+          <button
+            onClick={() => handleAddToCart(product.id, 1)}
+            disabled={loading}
+            className="flex-1 bg-gray-900 hover:bg-gray-800 text-white py-3 px-6 rounded-lg font-medium transition-all duration-300 flex items-center justify-center shadow-md hover:shadow-lg"
+          >
+            {loading ? (
+              <span className="loading loading-spinner loading-md"></span>
+            ) : (
+              <span className="flex items-center">
+                <FaShoppingCart className="mr-2" /> Add to Cart
+              </span>
+            )}
           </button>
         </div>
 

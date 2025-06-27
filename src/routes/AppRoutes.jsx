@@ -12,6 +12,9 @@ import CartPage from "../pages/CartPage";
 import OrderPage from "../pages/OrderPage";
 import PrivateRoutes from "./PrivateRoutes";
 import ActivateAcc from "../components/registration/ActivateAcc";
+import PaymentSuccess from "../components/payments/PaymentSuccess";
+import AddProductForm from "../components/products/form/AddProductForm";
+import AddCategoryForm from "../components/category/AddCategoryForm";
 
 const AppRoutes = () => {
   return (
@@ -21,6 +24,7 @@ const AppRoutes = () => {
         <Route path="registration" element={<RegistrationPage />} />
         <Route path="login" element={<LoginPage />} />
         <Route path="activate/:uid/:token/" element={<ActivateAcc />} />
+        <Route path="payment/success/" element={<PaymentSuccess />} />
         {/* <Route path="forgetPassword" element={<ForgetPassword />} />
         <Route path="about-us" element={<AboutUs />} />
         <Route path="contact-us" element={<ContactUs />} />
@@ -30,9 +34,11 @@ const AppRoutes = () => {
         /> */}
 
         <Route path="products" element={<ProductsPage />} />
+        <Route path="products/add" element={<AddProductForm />} />
         <Route path="products/:id" element={<ProductViewPage />} />
         <Route path="cart" element={<CartPage />} />
-        <Route path="order" element={<OrderPage />} />
+        <Route path="orders" element={<OrderPage />} />
+        <Route path="addCategory" element={<AddCategoryForm/>} />
       </Route>
 
       <Route

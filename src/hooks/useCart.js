@@ -44,6 +44,7 @@ const useCart = () => {
         product,
         quantity,
       });
+      await createOrGetCart()
       return { success: true, message: "Item added to cart successfully" };
     } catch (error) {
       console.log(error);

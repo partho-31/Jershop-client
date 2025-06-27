@@ -6,7 +6,7 @@ const CartItem = () => {
   return (
     <div className="md:w-2/3">
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-xl font-light">Your Cart (2 items)</h2>
+        <h2 className="text-xl font-light">Your Cart ({cartItems?.length} items)</h2>
         <button className="text-sm text-red-400 underline">Remove all</button>
       </div>
 

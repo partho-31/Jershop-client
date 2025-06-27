@@ -3,11 +3,12 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import HeroSection from "../components/home/heroSec/HeroSection";
 import LatestProductCard from "../components/home/latestProduct/LatestProductCard";
-import CategoryCard from "../components/home/category/CategoryCard";
+import CategoryCard from "../components/category/CategoryCard";
 import ProductCard from "../components/products/card/ProductCard";
 import {  FaTag } from "react-icons/fa";
 import LimitedAddition from "../components/home/limitedAddition.jsx/LimitedAddition";
 import useProductsContext from "../hooks/useProductsContext";
+import useCategoryContext from "../hooks/useCategoryContext";
 
 const HomePage = () => {
   useEffect(() => {
@@ -19,15 +20,14 @@ const HomePage = () => {
   }, []);
 
   const {productsList, latestProducts, loading } = useProductsContext()
+  const {categories} = useCategoryContext()
+
   return (
     <div className="bg-gray-50">
       {/* Hero Section */}
       <div className=" w-full bg-cyan-300 text-gray-800 text-sm sm:text-base text-center py-2 px-4">
         🎉 Limited Time Offer :
-        <span className="font-semibold"> Get 20% OFF</span> on all jerseys! Use
-        code
-        <span className="font-bold tracking-wide text-blue-600"> FAN20</span> at
-        checkout.
+        <span className="font-semibold"> Get 20% OFF</span> on all jerseys! 
       </div>
       <HeroSection />
 
@@ -113,7 +113,11 @@ const HomePage = () => {
           </h2>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            <CategoryCard />
+            {categories?.map((category)=> (
+              <div key={category.id}>
+                <CategoryCard category={category} />
+              </div>
+            ))}
           </div>
         </div>
       </section>

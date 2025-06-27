@@ -11,6 +11,7 @@ import { MdDashboard } from "react-icons/md";
 import { Link } from "react-router";
 import useAuthContext from "../../../hooks/useAuthContext";
 import { BsEnvelopeArrowDown } from "react-icons/bs";
+import { FiPackage } from "react-icons/fi";
 
 const SideBar = () => {
   const { logOut, user } = useAuthContext();
@@ -47,10 +48,10 @@ const SideBar = () => {
         
 
         {/* Payment History  */}
-        <Link to="paymetHistory">
+        <Link to="/orders">
           <div className="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-400">
-            <FaHistory className="text-lg" />
-            <span>Payment History</span>
+            <FiPackage className="text-lg" />
+            <span>Orders</span>
           </div>
         </Link>
 

@@ -3,6 +3,7 @@ import { RiStarFill, RiStarLine } from "react-icons/ri";
 import { Link } from "react-router";
 
 const ProductCard = ({ product }) => {
+  
   return (
     <Link to={`/products/${product.id}`}>
       <div className="card bg-white shadow-md hover:shadow-xl transition-shadow duration-300 flex-shrink-0 w-64 mx-10 my-5">
@@ -34,7 +35,7 @@ const ProductCard = ({ product }) => {
                 )}
               </div>
               <span className="text-sm text-gray-500">
-                ({product.reviewCount || "0"} reviews)
+                ({product?.reviews?.length || "0"} reviews)
               </span>
             </div>
           <div className="mt-1 flex justify-between items-center">

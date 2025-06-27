@@ -5,6 +5,7 @@ import { useNavigate } from "react-router";
 
 const useAuth = () => {
   const [user, setUser] = useState(null);
+  const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -110,12 +111,26 @@ const useAuth = () => {
     }
   };
 
+  const fetchOrder = async () => {
+    setLoading(true);
+    try {
+      const response = await AuthAPiClient.get("/api/order/");
+      setOrders(response.data);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     userProfile();
+    fetchOrder();
   }, [userProfile]);
 
   return {
     user,
+    orders,
     registration,
     activeAccViaEmail,
     userProfile,

@@ -1,8 +1,29 @@
 import { Link } from "react-router";
 import useCartContext from "../../../hooks/useCartContext";
+import AuthAPiClient from "../../../services/AuthApiClient";
+import { useState } from "react";
 
 const OrderSummary = () => {
-  const {cart} = useCartContext()
+  const { cart } = useCartContext();
+  const [loading, setLoading] = useState(false);
+
+  const handlePayment = async () => {
+    const total = cart?.total_amount + 20;
+    setLoading(true);
+    try {
+      const response = await AuthAPiClient.post("/api/payment/initiate/", {
+        total_amount: total,
+      });
+      if (response.data.payment_url) {
+        window.location.href = response.data.payment_url;
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(true);
+    }
+  };
+
   return (
     <div className="md:w-1/3">
       <div className="bg-white p-6 rounded-lg shadow-sm sticky top-8">
@@ -25,15 +46,18 @@ const OrderSummary = () => {
           <span>Total</span>
           <span>${cart?.total_amount + 20}</span>
         </div>
-        <button className="w-full bg-[#33332d] text-white py-3 rounded hover:bg-opacity-90 transition">
-          Checkout
+        <button
+          onClick={handlePayment}
+          className="w-full bg-[#33332d] text-white py-3 rounded hover:bg-opacity-90 transition"
+        >
+          {loading ? "Checking..." : "Checkout"}
         </button>
         <div className="mt-4 text-center text-sm text-gray-500">
           <p>
             or{" "}
-            <Link to="products"><p className="underline">
-              continue shopping
-            </p></Link>
+            <Link to="products">
+              <p className="underline">continue shopping</p>
+            </Link>
           </p>
         </div>
       </div>
