@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import ApiClient from "../services/ApiClient";
 import AuthAPiClient from "../services/AuthApiClient";
 import { useNavigate } from "react-router";
+import { toast } from "react-toastify";
 
 const useAuth = () => {
   const [user, setUser] = useState(null);
@@ -16,12 +17,23 @@ const useAuth = () => {
 
   const [authToken, setAuthToken] = useState(getToken());
 
+  const showErrorToast = () => {
+    toast.error("Something went wrong! Please try again later", {
+      position: "top-center",
+    });
+  };
+
   const registration = async (data) => {
     setLoading(true);
     try {
       await ApiClient.post("/auth/users/", data);
     } catch (error) {
-      console.log(error, "Registration Failed");
+      showErrorToast();
+      return {
+        success: false,
+        message: "Error creating new user",
+        error: error,
+      };
     } finally {
       setLoading(false);
     }
@@ -33,8 +45,12 @@ const useAuth = () => {
       await ApiClient.post("/auth/users/activation/", { uid, token });
       return { success: true, message: "Account active successful" };
     } catch (error) {
-      console.log(error);
-      return { success: false, message: "Activation failed" };
+      showErrorToast();
+      return {
+        success: false,
+        message: "activation failed",
+        error: error,
+      };
     }
   };
 
@@ -45,7 +61,11 @@ const useAuth = () => {
       const response = await AuthAPiClient.get("/auth/users/me/");
       setUser(response.data);
     } catch (error) {
-      console.log("Error while fetching user", error);
+      return {
+        success: false,
+        message: "Error getting user",
+        error: error,
+      };
     } finally {
       setLoading(false);
     }
@@ -60,7 +80,12 @@ const useAuth = () => {
       await userProfile();
       navigate("/");
     } catch (error) {
-      console.log("Error while fetching token", error);
+      showErrorToast();
+      return {
+        success: false,
+        message: "Error while login ",
+        error: error,
+      };
     } finally {
       setLoading(false);
     }
@@ -72,7 +97,12 @@ const useAuth = () => {
       const response = await AuthAPiClient.delete("/auth/users/me/");
       console.log(response);
     } catch (error) {
-      console.log("Error while deleting user", error);
+      showErrorToast();
+      return {
+        success: false,
+        message: "Error deleting account",
+        error: error,
+      };
     } finally {
       setLoading(false);
     }
@@ -93,7 +123,12 @@ const useAuth = () => {
         message: "A mail has sent to your email .Please check!",
       };
     } catch (error) {
-      console.log("Error while making request for reset pass", error);
+      showErrorToast();
+      return {
+        success: false,
+        message: "Error while reset_password ",
+        error: error,
+      };
     } finally {
       setLoading(false);
     }
@@ -107,7 +142,12 @@ const useAuth = () => {
       );
       console.log(response);
     } catch (error) {
-      console.log("Error while setting new pass", error);
+      showErrorToast();
+      return {
+        success: false,
+        message: "Error while set_password",
+        error: error,
+      };
     }
   };
 
@@ -117,7 +157,11 @@ const useAuth = () => {
       const response = await AuthAPiClient.get("/api/order/");
       setOrders(response.data);
     } catch (error) {
-      console.log(error);
+      return {
+        success: false,
+        message: "Error while fetching order ",
+        error: error,
+      };
     } finally {
       setLoading(false);
     }

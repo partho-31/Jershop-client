@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import ApiClient from "../services/ApiClient";
 import AuthAPiClient from "../services/AuthApiClient";
+import { toast } from "react-toastify";
 
 const useProducts = () => {
   const [productsList, setProductsList] = useState([]);
@@ -9,13 +10,24 @@ const useProducts = () => {
   const [searchByCategory, setSearchByCategory] = useState("");
   const [searchByKeyword, setSearchByKeyword] = useState("");
 
+  const showErrorToast = () => {
+    toast.error("Something went wrong! Please try again later", {
+      position: "top-center",
+    });
+  };
+
   const createProduct = async (data) => {
     setLoading(true);
     try {
       await AuthAPiClient.post("/api/products/", data);
       return { success: true, message: "Product created successfully!" };
     } catch (error) {
-      console.log("Error while creating products", error);
+      showErrorToast();
+      return {
+        success: false,
+        message: "Error creating product",
+        error: error,
+      };
     } finally {
       setLoading(false);
     }
@@ -27,7 +39,11 @@ const useProducts = () => {
       const response = await ApiClient.get("/api/latest/products/");
       setLatestProducts(response.data);
     } catch (error) {
-      console.log("Error while fetching products", error);
+      return {
+        success: false,
+        message: "Error getting product",
+        error: error,
+      };
     } finally {
       setLoading(false);
     }
@@ -39,7 +55,12 @@ const useProducts = () => {
       await AuthAPiClient.patch(`/api/products/${id}/`, data);
       return { success: true, message: "Product updated successfully!" };
     } catch (error) {
-      console.log("Error while updating product", error);
+      showErrorToast();
+      return {
+        success: false,
+        message: "Error updating product",
+        error: error,
+      };
     } finally {
       setLoading(false);
     }
@@ -51,7 +72,12 @@ const useProducts = () => {
       await AuthAPiClient.delete(`/api/products/${id}/`);
       return { success: true, message: "Product deleted successfully!" };
     } catch (error) {
-      console.log("Error while deleting product", error);
+      showErrorToast();
+      return {
+        success: false,
+        message: "Error deleting product",
+        error: error,
+      };
     } finally {
       setLoading(false);
     }
@@ -66,7 +92,12 @@ const useProducts = () => {
         );
         setProductsList(response.data);
       } catch (error) {
-        console.log("Error while fetching products", error);
+        showErrorToast()
+        return {
+          success: false,
+          message: "Error getting product",
+          error: error,
+        };
       } finally {
         setLoading(false);
       }

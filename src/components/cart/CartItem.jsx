@@ -1,12 +1,25 @@
 import { FaMinus, FaPlus, FaTrashAlt } from "react-icons/fa";
 import useCartContext from "../../hooks/useCartContext";
+import { toast } from "react-toastify";
 
 const CartItem = () => {
-  const {cartItems} = useCartContext()
+  const { cartItems, deleteCartItem, loading } = useCartContext();
+
+  const deleteItem = async (id) => {
+    const response = await deleteCartItem(id);
+    if (response.success) {
+      toast.success(response.message, {
+        position: "top-center",
+      });
+    }
+  };
+
   return (
     <div className="md:w-2/3">
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-xl font-light">Your Cart ({cartItems?.length} items)</h2>
+        <h2 className="text-xl font-light">
+          Your Cart ({cartItems?.length} items)
+        </h2>
         <button className="text-sm text-red-400 underline">Remove all</button>
       </div>
 
@@ -27,8 +40,15 @@ const CartItem = () => {
             <div className="flex-1 ms-3">
               <div className="flex justify-between">
                 <h3 className="font-medium">{item.product.name}</h3>
-                <button className="ml-auto text-red-400 hover:text-red-500">
-                  <FaTrashAlt />
+                <button
+                  onClick={() => deleteItem(item.id)}
+                  className="ml-auto text-red-400 hover:text-red-500"
+                >
+                  {loading ? (
+                    <span className="loading loading-spinner text-error"></span>
+                  ) : (
+                    <FaTrashAlt />
+                  )}
                 </button>
               </div>
               <div className="flex items-center justify-between mt-4">

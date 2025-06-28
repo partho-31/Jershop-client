@@ -15,6 +15,8 @@ import ActivateAcc from "../components/registration/ActivateAcc";
 import PaymentSuccess from "../components/payments/PaymentSuccess";
 import AddProductForm from "../components/products/form/AddProductForm";
 import AddCategoryForm from "../components/category/AddCategoryForm";
+import AboutUs from "../pages/AboutUs";
+import ContactUs from "../pages/ContactUs";
 
 const AppRoutes = () => {
   return (
@@ -26,13 +28,12 @@ const AppRoutes = () => {
         <Route path="activate/:uid/:token/" element={<ActivateAcc />} />
         <Route path="payment/success/" element={<PaymentSuccess />} />
         {/* <Route path="forgetPassword" element={<ForgetPassword />} />
-        <Route path="about-us" element={<AboutUs />} />
-        <Route path="contact-us" element={<ContactUs />} />
         <Route
           path="/password/reset/confirm/:uid/:token"
           element={<ResetPasswordConfirm />}
         /> */}
-
+        <Route path="about-us" element={<AboutUs/>} />
+        <Route path="contact-us" element={<ContactUs/>} />
         <Route path="products" element={<ProductsPage />} />
         <Route path="products/add" element={<AddProductForm />} />
         <Route path="products/:id" element={<ProductViewPage />} />

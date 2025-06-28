@@ -1,11 +1,18 @@
 import { useCallback, useEffect, useState } from "react";
 import AuthAPiClient from "../services/AuthApiClient";
+import { toast } from "react-toastify";
 
 const useCart = () => {
   const [cart, setCart] = useState(null);
   const [cartID, setCartID] = useState(() => localStorage.getItem("cartId"));
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(false);
+
+  const showErrorToast = () => {
+    toast.error("Something went wrong! Please try again later", {
+      position: "top-center",
+    });
+  };
 
   const getCartItems = useCallback(async () => {
     if (!cartID) return;
@@ -14,7 +21,11 @@ const useCart = () => {
       const response = await AuthAPiClient.get(`/api/cart/${cartID}/items/`);
       setCartItems(response.data);
     } catch (error) {
-      console.log(error);
+      return {
+        success: false,
+        message: "Error getting cartItem",
+        error: error,
+      };
     } finally {
       setLoading(false);
     }
@@ -31,7 +42,11 @@ const useCart = () => {
       setCart(response.data);
       getCartItems();
     } catch (error) {
-      console.log("Creating Cart Error!", error);
+      return {
+        success: false,
+        message: "Error getting cart",
+        error: error,
+      };
     } finally {
       setLoading(false);
     }
@@ -44,10 +59,33 @@ const useCart = () => {
         product,
         quantity,
       });
-      await createOrGetCart()
+      await createOrGetCart();
       return { success: true, message: "Item added to cart successfully" };
     } catch (error) {
-      console.log(error);
+      showErrorToast();
+      return {
+        success: false,
+        message: "Error getting product",
+        error: error,
+      };
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const deleteCartItem = async (id) => {
+    setLoading(true);
+    try {
+      await AuthAPiClient.delete(`/api/cart/${cartID}/items/${id}/`);
+      await createOrGetCart();
+      return { success: true, message: "Item removed from the cart" };
+    } catch (error) {
+      showErrorToast();
+      return {
+        success: false,
+        message: "Error deleting cart item",
+        error: error,
+      };
     } finally {
       setLoading(false);
     }
@@ -57,7 +95,14 @@ const useCart = () => {
     createOrGetCart();
   }, [createOrGetCart]);
 
-  return { createOrGetCart, cart, addCartItems, cartItems, loading };
+  return {
+    createOrGetCart,
+    cart,
+    addCartItems,
+    cartItems,
+    deleteCartItem,
+    loading,
+  };
 };
 
 export default useCart;
