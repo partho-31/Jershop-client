@@ -40,7 +40,7 @@ const useCart = () => {
         setCartID(response.data.id);
       }
       setCart(response.data);
-      getCartItems();
+      await getCartItems();
     } catch (error) {
       return {
         success: false,

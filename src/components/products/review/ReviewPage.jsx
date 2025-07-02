@@ -28,10 +28,10 @@ const ReviewPage = ({ reviews, product, handleReview }) => {
         <span className="text-gray-400 font-bold">No review available</span>
       )}
       {reviews?.map((review) => (
-        <div className="space-y-6 mb-12" key={review.id}>
-          <div className="bg-white rounded-lg shadow-md p-6">
+        <div className="space-y-2 mb-5" key={review.id}>
+          <div className="bg-white rounded-lg shadow-md px-8 py-2">
             <div className="flex justify-between items-start">
-              <div className="mb-2">
+              <div className="mb-2 ">
                 <h4 className="font-semibold">
                   {review.user.first_name} {review.user.last_name}
                 </h4>
@@ -51,7 +51,7 @@ const ReviewPage = ({ reviews, product, handleReview }) => {
                 handleFetch={handleReview}
               />
             </div>
-            <p className="text-gray-700 mb-3">{review.comment}</p>
+            <p className="text-gray-700">{review.comment}</p>
             {review.image && (
               <div className="flex space-x-2">
                 <img

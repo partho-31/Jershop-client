@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-commerce Product Filter</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50">
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold mb-8">Our Products</h1>
+        
+        <div class="flex flex-col md:flex-row gap-8">
+            <!-- Left Sidebar - Filters Section -->
+            <div class="w-full md:w-1/4 space-y-6">
+                <div class="bg-white p-4 rounded-lg shadow">
+                    <h2 class="font-semibold text-lg mb-4">🔍 Search</h2>
+                    <input type="text" placeholder="Search products..." class="w-full p-2 border rounded">
+                </div>
+                
+                <div class="bg-white p-4 rounded-lg shadow">
+                    <h2 class="font-semibold text-lg mb-4">🧩 Categories</h2>
+                    <div class="space-y-2">
+                        <label class="flex items-center">
+                            <input type="checkbox" class="mr-2"> T-Shirts
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" class="mr-2"> Jeans
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" class="mr-2"> Dresses
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" class="mr-2"> Jackets
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-4 rounded-lg shadow">
+                    <h2 class="font-semibold text-lg mb-4">💰 Price Range</h2>
+                    <input type="range" min="0" max="500" class="w-full mb-2">
+                    <div class="flex justify-between">
+                        <span>$0</span>
+                        <span>$500</span>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-4 rounded-lg shadow">
+                    <h2 class="font-semibold text-lg mb-4">🎨 Colors</h2>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="w-6 h-6 rounded-full bg-red-500 cursor-pointer"></span>
+                        <span class="w-6 h-6 rounded-full bg-blue-500 cursor-pointer"></span>
+                        <span class="w-6 h-6 rounded-full bg-green-500 cursor-pointer"></span>
+                        <span class="w-6 h-6 rounded-full bg-yellow-500 cursor-pointer"></span>
+                        <span class="w-6 h-6 rounded-full bg-black cursor-pointer"></span>
+                        <span class="w-6 h-6 rounded-full bg-white border border-gray-300 cursor-pointer"></span>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-4 rounded-lg shadow">
+                    <h2 class="font-semibold text-lg mb-4">🧵 Sizes</h2>
+                    <div class="flex flex-wrap gap-2">
+                        <button class="px-3 py-1 border rounded hover:bg-gray-100">S</button>
+                        <button class="px-3 py-1 border rounded hover:bg-gray-100">M</button>
+                        <button class="px-3 py-1 border rounded hover:bg-gray-100">L</button>
+                        <button class="px-3 py-1 border rounded hover:bg-gray-100">XL</button>
+                        <button class="px-3 py-1 border rounded hover:bg-gray-100">XXL</button>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-4 rounded-lg shadow">
+                    <h2 class="font-semibold text-lg mb-4">🔄 Sort By</h2>
+                    <select class="w-full p-2 border rounded">
+                        <option>Price: Low to High</option>
+                        <option>Price: High to Low</option>
+                        <option>Customer Rating</option>
+                        <option>Newest Arrivals</option>
+                        <option>Best Selling</option>
+                    </select>
+                </div>
+                
+                <button class="w-full py-2 bg-gray-200 hover:bg-gray-300 rounded-lg font-medium">
+                    ♻️ Clear Filters
+                </button>
+            </div>
+            
+            <!-- Right Content - Product Grid -->
+            <div class="w-full md:w-3/4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Product 1 -->
+                    <div class="bg-white rounded-lg shadow overflow-hidden hover:shadow-lg transition-shadow duration-300 group">
+                        <div class="relative overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" 
+                                 alt="Classic White T-Shirt" 
+                                 class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105">
+                            <img src="https://images.unsplash.com/photo-1527719327859-c6ce80353573?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" 
+                                 alt="Classic White T-Shirt back view" 
+                                 class="absolute inset-0 w-full h-64 object-cover transition-opacity duration-500 opacity-0 group-hover:opacity-100">
+                            <button class="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black text-white px-4 py-2 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                Quick View
+                            </button>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-semibold text-lg mb-1">Classic White T-Shirt</h3>
+                            <div class="flex items-center mb-2">
+                                <div class="flex text-yellow-400">
+                                    ★ ★ ★ ★ ☆
+                                </div>
+                                <span class="text-gray-500 text-sm ml-1">(42)</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="font-bold text-lg">$24.99</span>
+                                <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded transition-colors">
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 2 -->
+                    <div class="bg-white rounded-lg shadow overflow-hidden hover:shadow-lg transition-shadow duration-300 group">
+                        <div class="relative overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1542272604-787c3835535d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" 
+                                 alt="Slim Fit Jeans" 
+                                 class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105">
+                            <img src="https://images.unsplash.com/photo-1473966968600-fa801b869a1a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" 
+                                 alt="Slim Fit Jeans back view" 
+                                 class="absolute inset-0 w-full h-64 object-cover transition-opacity duration-500 opacity-0 group-hover:opacity-100">
+                            <button class="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black text-white px-4 py-2 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                Quick View
+                            </button>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-semibold text-lg mb-1">Slim Fit Jeans</h3>
+                            <div class="flex items-center mb-2">
+                                <div class="flex text-yellow-400">
+                                    ★ ★ ★ ★ ★
+                                </div>
+                                <span class="text-gray-500 text-sm ml-1">(128)</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="font-bold text-lg">$59.99</span>
+                                <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded transition-colors">
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Pagination -->
+                <div class="mt-8 flex justify-center">
+                    <nav class="flex items-center gap-1">
+                        <button class="px-3 py-1 border rounded hover:bg-gray-100">Previous</button>
+                        <button class="px-3 py-1 border rounded bg-blue-600 text-white">1</button>
+                        <button class="px-3 py-1 border rounded hover:bg-gray-100">2</button>
+                        <button class="px-3 py-1 border rounded hover:bg-gray-100">3</button>
+                        <button class="px-3 py-1 border rounded hover:bg-gray-100">Next</button>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

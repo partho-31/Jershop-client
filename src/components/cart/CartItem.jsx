@@ -1,18 +1,9 @@
 import { FaMinus, FaPlus, FaTrashAlt } from "react-icons/fa";
 import useCartContext from "../../hooks/useCartContext";
-import { toast } from "react-toastify";
+import DeleteCartItem from "./DeleteCartItem";
 
 const CartItem = () => {
-  const { cartItems, deleteCartItem, loading } = useCartContext();
-
-  const deleteItem = async (id) => {
-    const response = await deleteCartItem(id);
-    if (response.success) {
-      toast.success(response.message, {
-        position: "top-center",
-      });
-    }
-  };
+  const { cartItems} = useCartContext();
 
   return (
     <div className="md:w-2/3">
@@ -40,16 +31,7 @@ const CartItem = () => {
             <div className="flex-1 ms-3">
               <div className="flex justify-between">
                 <h3 className="font-medium">{item.product.name}</h3>
-                <button
-                  onClick={() => deleteItem(item.id)}
-                  className="ml-auto text-red-400 hover:text-red-500"
-                >
-                  {loading ? (
-                    <span className="loading loading-spinner text-error"></span>
-                  ) : (
-                    <FaTrashAlt />
-                  )}
-                </button>
+                <DeleteCartItem id={item.id} />
               </div>
               <div className="flex items-center justify-between mt-4">
                 <div className="flex items-center">

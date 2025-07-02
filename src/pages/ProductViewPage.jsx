@@ -1,9 +1,13 @@
 import ProductDetails from "../components/products/detials/ProductDetails";
 import ReviewPage from "../components/products/review/ReviewPage";
 import ReviewForm from "../components/products/review/ReviewForm";
-import { useParams } from "react-router";
+import {  useParams } from "react-router";
 import { useCallback, useEffect, useState } from "react";
 import ApiClient from "../services/ApiClient";
+import RelatedProducts from "../components/products/related/RelatedProducts";
+import ImageGallery from "../components/products/Gallary/ImageGallery";
+
+
 
 const ProductViewPage = () => {
   const { id } = useParams();
@@ -11,32 +15,35 @@ const ProductViewPage = () => {
   const [reviews, setReviews] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const getReviews = useCallback( async () => {
+  const getReviews = useCallback(async () => {
     try {
       const response = await ApiClient.get(`/api/products/${id}/review/`);
       setReviews(response.data);
     } catch (error) {
       console.log("Error while fetching reviews", error);
     }
-  },[id]);
+  }, [id]);
 
   
- useEffect(() => {
-  const getProduct = async () => {
-    setLoading(true);
-    try {
-      const response = await ApiClient.get(`/api/products/${id}/`);
-      setProduct(response.data);
-      await getReviews();
-    } catch (error) {
-      console.log("Error while fetching product", error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  useEffect(() => {
+    const getProduct = async () => {
+      setLoading(true);
+      try {
+        const response = await ApiClient.get(`/api/products/${id}/`);
+        setProduct(response.data);
+        await getReviews();
+      } catch (error) {
+        console.log("Error while fetching product", error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  getProduct();
-}, [id,getReviews]);  
+    getProduct();
+     
+  }, [id,getReviews]);
+
+
 
   return (
     <div className="bg-gray-50 min-h-screen">
@@ -49,13 +56,7 @@ const ProductViewPage = () => {
           <div className="flex flex-col  lg:flex-row gap-8">
             {/* Product Images */}
             <div className="lg:w-1/2">
-              <div className="bg-white rounded-lg shadow-md overflow-hidden mb-4 h-lvh">
-                <img
-                  src={product?.iamge}
-                  alt="Product"
-                  className="w-full  object-cover"
-                />
-              </div>
+              <ImageGallery images={product?.images} />
             </div>
             {/* Product Details */}
             <ProductDetails product={product} rating={reviews?.length || 0} />
@@ -66,7 +67,7 @@ const ProductViewPage = () => {
             <div className="border-b border-gray-200">
               <nav className="flex -mb-px">
                 <button className="py-4 px-6 text-center border-b-2 font-medium text-sm  border-blue-500 text-blue-600">
-                  Reviews (42)
+                  Reviews ({reviews?.length || 0})
                 </button>
               </nav>
             </div>
@@ -79,6 +80,9 @@ const ProductViewPage = () => {
               <ReviewForm handleReview={getReviews} />
             </div>
           </div>
+
+          <RelatedProducts product={product} />
+        
         </div>
       )}
     </div>

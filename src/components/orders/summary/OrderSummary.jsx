@@ -53,12 +53,12 @@ const OrderSummary = () => {
           {loading ? "Checking..." : "Checkout"}
         </button>
         <div className="mt-4 text-center text-sm text-gray-500">
-          <p>
+          <div>
             or{" "}
             <Link to="products">
               <p className="underline">continue shopping</p>
             </Link>
-          </p>
+          </div>
         </div>
       </div>
     </div>

@@ -5,10 +5,11 @@ import HeroSection from "../components/home/heroSec/HeroSection";
 import LatestProductCard from "../components/home/latestProduct/LatestProductCard";
 import CategoryCard from "../components/category/CategoryCard";
 import ProductCard from "../components/products/card/ProductCard";
-import {  FaTag } from "react-icons/fa";
+import { FaTag, FaFire } from "react-icons/fa";
 import LimitedAddition from "../components/home/limitedAddition.jsx/LimitedAddition";
 import useProductsContext from "../hooks/useProductsContext";
 import useCategoryContext from "../hooks/useCategoryContext";
+import { Link } from "react-router";
 
 const HomePage = () => {
   useEffect(() => {
@@ -19,35 +20,28 @@ const HomePage = () => {
     });
   }, []);
 
-  const {productsList, latestProducts, loading } = useProductsContext()
-  const {categories} = useCategoryContext()
+  const { latestProducts, loading, hotDeals,popularPicks} = useProductsContext();
+  const { categories } = useCategoryContext();
 
   return (
-    <div className="bg-gray-50">
+    <div className="bg-gray-100">
       {/* Hero Section */}
-      <div className=" w-full bg-cyan-300 text-gray-800 text-sm sm:text-base text-center py-2 px-4">
-        🎉 Limited Time Offer :
-        <span className="font-semibold"> Get 20% OFF</span> on all jerseys! 
-      </div>
       <HeroSection />
 
       {/* Latest Products */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex justify-between items-center mb-10">
-            <h2
-              className="text-3xl font-bold text-gray-900"
-              data-aos="fade-right"
-            >
-              Latest Arrivals
-            </h2>
-            <a
-              href="#"
-              className="btn btn-ghost text-blue-600 hover:text-blue-700"
-              data-aos="fade-left"
-            >
-              View All &rarr;
-            </a>
+      <section className="px-14 my-20">
+        <div className="mx-auto">
+          <div className="flex justify-between items-center">
+            <h2 className="text-3xl font-bold ">Latest Arrivals 🔥</h2>
+            <Link to="products">
+              {" "}
+              <button
+                className="btn btn-ghost text-blue-600 hover:text-blue-700"
+                data-aos="fade-left"
+              >
+                View All &rarr;
+              </button>
+            </Link>
           </div>
 
           {/* Card of Products */}
@@ -77,43 +71,76 @@ const HomePage = () => {
             </p>
           </div>
 
-          <button className="flex-shrink-0 px-6 py-3 bg-white text-blue-600 font-semibold rounded-lg shadow-md hover:bg-blue-50 hover:shadow-lg transition-all duration-300 transform group-hover:-translate-y-1 flex items-center gap-2">
-            Shop Now
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-4 w-4"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M14 5l7 7m0 0l-7 7m7-7H3"
-              />
-            </svg>
-          </button>
+          <Link to="products">
+            {" "}
+            <button className="flex-shrink-0 px-6 py-3 bg-white text-blue-600 font-semibold rounded-lg shadow-md hover:bg-blue-50 hover:shadow-lg transition-all duration-300 transform group-hover:-translate-y-1 flex items-center gap-2">
+              Shop Now
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-4 w-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M14 5l7 7m0 0l-7 7m7-7H3"
+                />
+              </svg>
+            </button>
+          </Link>
         </div>
 
         {/* Discount percentage badge */}
         <div className="absolute top-4 right-4 bg-yellow-400 text-blue-900 font-bold px-3 py-1 rounded-md text-sm shadow-lg transform rotate-6">
-          40% OFF
+          up to 40% OFF
         </div>
       </div>
 
+      {/* Hot Deals */}
+      <section className="my-20 px-14">
+        <div className="">
+          <div className="flex justify-between items-center ">
+            <h2 className="text-3xl font-bold text-gray-900">Hot Deals 🔥</h2>
+            <Link to="products">
+              <button
+                href="#"
+                className="btn btn-ghost text-blue-600 hover:text-blue-700"
+                data-aos="fade-left"
+              >
+                View All &rarr;
+              </button>
+            </Link>
+          </div>
+
+          <div className="relative">
+            {loading && (
+              <div className="w-full flex justify-center">
+                <span className="loading loading-spinner text-info"></span>
+              </div>
+            )}
+            <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
+              {hotDeals.map((product) => (
+                <div key={product.id} className="mt-10">
+                  <ProductCard product={product} />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Top Categories */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-100">
-        <div className="max-w-7xl mx-auto">
-          <h2
-            className="text-3xl font-bold text-gray-900 mb-10 text-center"
-            data-aos="fade-up"
-          >
-            Shop By Category
+      <section className="">
+        <div className="px-14">
+          <h2 className="text-3xl my-20 font-bold text-gray-900 text-center">
+            Shop By <span className="text-blue-400">Category</span>
           </h2>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {categories?.map((category)=> (
+          <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+            {categories?.map((category) => (
               <div key={category.id}>
                 <CategoryCard category={category} />
               </div>
@@ -123,33 +150,32 @@ const HomePage = () => {
       </section>
 
       {/* Popular Products */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex justify-between items-center mb-10">
-            <h2
-              className="text-3xl font-bold text-gray-900"
-              data-aos="fade-right"
-            >
+      <section className="my-20 px-14">
+        <div className="">
+          <div className="flex justify-between items-center ">
+            <h2 className="text-3xl font-bold text-gray-900">
               Popular Picks 🔥
             </h2>
-            <a
-              href="#"
-              className="btn btn-ghost text-blue-600 hover:text-blue-700"
-              data-aos="fade-left"
-            >
-              View All &rarr;
-            </a>
+            <Link to="products">
+              <button
+                href="#"
+                className="btn btn-ghost text-blue-600 hover:text-blue-700"
+                data-aos="fade-left"
+              >
+                View All &rarr;
+              </button>
+            </Link>
           </div>
 
-          <div className="relative">
+          <div className="relative ">
             {loading && (
               <div className="w-full flex justify-center">
                 <span className="loading loading-spinner text-info"></span>
               </div>
             )}
-            <div className="flex overflow-x-auto pb-6 scrollbar-hide gap-6">
-              {productsList.map((product) => (
-                <div key={product.id}>
+            <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
+              {popularPicks.map((product) => (
+                <div key={product.id} className="mt-10">
                   <ProductCard product={product} />
                 </div>
               ))}

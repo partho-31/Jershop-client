@@ -3,6 +3,7 @@ import useCartContext from "../../../hooks/useCartContext";
 import { toast } from "react-toastify";
 import { FaShoppingCart } from "react-icons/fa";
 
+
 const LatestProductCard = ({ product }) => {
   const { addCartItems, loading } = useCartContext();
 
@@ -16,19 +17,15 @@ const LatestProductCard = ({ product }) => {
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto bg-white rounded-xl shadow-2xl overflow-hidden transition-all duration-300 hover:shadow-3xl hover:-translate-y-1">
+    <div className="w-full max-w-4xl mt-20 mx-auto bg-white rounded-xl shadow-2xl overflow-hidden transition-all duration-300 hover:shadow-3xl hover:-translate-y-1">
       <div className="flex flex-col md:flex-row">
-        {/* Product Image - No white space */}
+        {/* Product Image  */}
         <div className="md:w-1/2 relative">
           <img
             src="https://res.cloudinary.com/dvyz3blnz/image/upload/v1750795957/new_cristiano_ronaldo_al_nassr_1695738518_89ac811d_progressive_u8uyrw.jpg"
             alt={product.name}
             className="absolute inset-0 w-full h-full object-cover"
-          />
-          <div className="pt-[66.66%] md:hidden" />{" "}
-          {/* Maintains aspect ratio on small screens */}
-          <div className="hidden md:block h-80" />{" "}
-          {/* Maintains height on md+ screens */}
+          />   
         </div>
 
         {/* Product Content */}

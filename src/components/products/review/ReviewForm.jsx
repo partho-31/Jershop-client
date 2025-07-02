@@ -47,7 +47,7 @@ const ReviewForm = ({ handleReview }) => {
   const rating = watch("rating", 0);
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6 w-1/2">
+    <div className="bg-white rounded-lg  p-6 w-1/3">
       <h3 className="text-xl font-bold mb-6">Write a Review</h3>
       <form onSubmit={handleSubmit(onSubmit)}>
         {/* Rating Section */}

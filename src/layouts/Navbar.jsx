@@ -8,7 +8,7 @@ const Navbar = () => {
   const {cart,createOrGetCart} = useCartContext()
     
   return (
-    <div className="navbar bg-white py-4 shadow-lg  sm:px-8 ">
+    <div className="navbar text-blue-400 py-4 shadow-lg  sm:px-8 ">
       <div className="navbar-start py-1">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -46,7 +46,7 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
-        <p className=" text-gray-700 text-lg lg:text-2xl font-bold lg:ml-5">
+        <p className=" text-gray-700 text-lg lg:text-2xl font-bold">
           JerseyBari
         </p>
       </div>
