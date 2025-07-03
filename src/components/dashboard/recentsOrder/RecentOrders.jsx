@@ -7,37 +7,11 @@ import {
 } from "react-icons/fi";
 import { BsCheckCircle, BsTruck, BsClockHistory } from "react-icons/bs";
 import { FaBangladeshiTakaSign } from "react-icons/fa6";
+import useAuthContext from "../../../hooks/useAuthContext";
+import { Link } from "react-router";
 
 const RecentOrders = () => {
-  const orders = [
-    {
-      id: "JER-1001",
-      customer: "Alex Morgan",
-      product: "Home Jersey 2023",
-      phone: "(555) 123-4567",
-      amount: 89.99,
-      status: "shipped",
-      date: "2023-06-15",
-    },
-    {
-      id: "JER-1002",
-      customer: "Jamie Smith",
-      product: "Away Jersey 2023",
-      phone: "(555) 987-6543",
-      amount: 79.99,
-      status: "processing",
-      date: "2023-06-14",
-    },
-    {
-      id: "JER-1003",
-      customer: "Taylor Johnson",
-      product: "Training Kit",
-      phone: "(555) 456-7890",
-      amount: 59.99,
-      status: "delivered",
-      date: "2023-06-12",
-    },
-  ];
+  const { orders } = useAuthContext();
 
   const getStatusIcon = (status) => {
     switch (status) {
@@ -48,7 +22,7 @@ const RecentOrders = () => {
       case "processing":
         return <BsClockHistory className="text-yellow-500" />;
       default:
-        return <BsClockHistory className="text-gray-500" />;
+        return <BsClockHistory className="text-orange-500" />;
     }
   };
 
@@ -61,10 +35,10 @@ const RecentOrders = () => {
       case "processing":
         return "bg-yellow-100 text-yellow-800";
       default:
-        return "bg-gray-100 text-gray-800";
+        return "bg-gray-100 text-orange-800";
     }
   };
-
+  console.log(orders);
   return (
     <div className="bg-white rounded-xl shadow-sm overflow-hidden w-4/5 mx-auto my-16">
       <div className="px-6 py-4 border-b bg-gray-200 border-gray-200 flex justify-between items-center">
@@ -73,9 +47,9 @@ const RecentOrders = () => {
       </div>
 
       <div className="divide-y divide-gray-300">
-        {orders.map((order) => (
+        {orders.slice(0, 3).map((order, index) => (
           <div
-            key={order.id}
+            key={index}
             className="px-6 py-5 hover:bg-gray-100 transition-colors duration-150"
           >
             <div className="grid  md:grid-cols-12 gap-4 items-center">
@@ -84,7 +58,9 @@ const RecentOrders = () => {
                   <FiPackage className="text-blue-600" size={20} />
                 </div>
                 <div>
-                  <p className="font-semibold text-gray-800">{order.id}</p>
+                  <p className="font-semibold text-gray-800">
+                    {order.id.slice(0, 8)}
+                  </p>
                   <p className="text-sm text-gray-500 truncate">
                     {order.product}
                   </p>
@@ -96,10 +72,12 @@ const RecentOrders = () => {
                   <FiUser className="text-purple-600" size={20} />
                 </div>
                 <div>
-                  <p className="font-medium text-gray-800">{order.customer}</p>
+                  <p className="font-medium text-gray-800">
+                    {order.user.first_name}
+                  </p>
                   <div className="flex items-center text-sm text-gray-500">
                     <FiPhone size={14} className="mr-1" />
-                    {order.phone}
+                    {order.user.phone_number}
                   </div>
                 </div>
               </div>
@@ -109,8 +87,10 @@ const RecentOrders = () => {
                   <FaBangladeshiTakaSign className="text-green-600" size={18} />
                 </div>
                 <div>
-                  <p className="font-medium">{order.amount}</p>
-                  <p className="text-xs text-gray-500">{order.date}</p>
+                  <p className="font-medium">{order.total_amount}</p>
+                  <p className="text-xs text-gray-500">
+                    {new Date(order.created_at).toLocaleDateString()}
+                  </p>
                 </div>
               </div>
 
@@ -137,15 +117,15 @@ const RecentOrders = () => {
 
       <div className="px-6 py-3  flex justify-between items-center">
         <span className="text-xs md:text-sm text-gray-500">
-          Showing {orders.length} of 24 orders
+          Showing 3 of {orders?.length} orders
         </span>
-        <a
-          href="#"
-          className="inline-flex text-xs items-center text-blue-600 hover:text-blue-800 md:font-medium"
-        >
-          View all orders
-          <FiChevronRight  size={18} />
-        </a>
+
+        <Link to="orders">
+          <div className="inline-flex text-xs items-center text-blue-600 hover:text-blue-800 md:font-medium">
+            View all orders
+            <FiChevronRight size={18} />
+          </div>
+        </Link>
       </div>
     </div>
   );

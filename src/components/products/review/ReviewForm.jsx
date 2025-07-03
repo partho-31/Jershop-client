@@ -47,7 +47,7 @@ const ReviewForm = ({ handleReview }) => {
   const rating = watch("rating", 0);
 
   return (
-    <div className="bg-white rounded-lg  p-6 w-1/3">
+    <div className="bg-white rounded-lg  p-6 sm:w-1/2">
       <h3 className="text-xl font-bold mb-6">Write a Review</h3>
       <form onSubmit={handleSubmit(onSubmit)}>
         {/* Rating Section */}
@@ -87,7 +87,7 @@ const ReviewForm = ({ handleReview }) => {
         </div>
 
         {/* File Upload */}
-        <div className="mb-6">
+        <div className="mb-6 ">
           <label className="block text-gray-700 font-medium mb-2">
             Add Photos (Optional)
           </label>
@@ -107,7 +107,7 @@ const ReviewForm = ({ handleReview }) => {
               <div className="flex flex-col items-center justify-center pt-5 pb-6">
                 <FaCloudUploadAlt className="text-gray-400 text-2xl mb-1" />
                 <p className="mb-1 text-sm text-gray-500">
-                  Click to upload or drag and drop
+                  Click to upload 
                 </p>
                 <p className="text-xs text-gray-500">
                   PNG, JPG (MAX. 5MB each)

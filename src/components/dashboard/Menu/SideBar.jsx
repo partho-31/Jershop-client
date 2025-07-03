@@ -11,6 +11,7 @@ import { MdDashboard } from "react-icons/md";
 import { Link } from "react-router";
 import useAuthContext from "../../../hooks/useAuthContext";
 import { BsEnvelopeArrowDown } from "react-icons/bs";
+import { IoMdAddCircleOutline } from "react-icons/io";
 import { FiPackage } from "react-icons/fi";
 
 const SideBar = () => {
@@ -42,13 +43,25 @@ const SideBar = () => {
             <span>Profile</span>
           </div>
         </Link>
-
         
-       
-        
+        {/* Add Category   */}
+        <Link to="addCategory">
+          <div className="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-400">
+            <IoMdAddCircleOutline className="text-xl" />
+            <span>Add Categories</span>
+          </div>
+        </Link>
 
-        {/* Payment History  */}
-        <Link to="/orders">
+        {/* Add Products   */}
+        <Link to="products/add">
+          <div className="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-400">
+            <IoMdAddCircleOutline className="text-xl" />
+            <span>Add Products</span>
+          </div>
+        </Link>
+
+        {/* Orders History  */}
+        <Link to="orders">
           <div className="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-400">
             <FiPackage className="text-lg" />
             <span>Orders</span>

@@ -14,7 +14,7 @@ const OrderCard = ({ order }) => {
             <div className="flex items-start gap-4" key={item.id}>
               <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gray-100 rounded-md overflow-hidden">
                 <img
-                  src={item.product.images}
+                  src={item.product.images?.[0].image}
                   alt="Product Img"
                   className="object-cover w-full h-full"
                 />

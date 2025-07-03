@@ -1,13 +1,12 @@
 import ProductDetails from "../components/products/detials/ProductDetails";
 import ReviewPage from "../components/products/review/ReviewPage";
 import ReviewForm from "../components/products/review/ReviewForm";
-import {  useParams } from "react-router";
+import { useParams } from "react-router";
 import { useCallback, useEffect, useState } from "react";
 import ApiClient from "../services/ApiClient";
 import RelatedProducts from "../components/products/related/RelatedProducts";
 import ImageGallery from "../components/products/Gallary/ImageGallery";
-
-
+import PromoBanner from "../components/products/banner/PromoBanner";
 
 const ProductViewPage = () => {
   const { id } = useParams();
@@ -24,7 +23,6 @@ const ProductViewPage = () => {
     }
   }, [id]);
 
-  
   useEffect(() => {
     const getProduct = async () => {
       setLoading(true);
@@ -40,26 +38,40 @@ const ProductViewPage = () => {
     };
 
     getProduct();
-     
-  }, [id,getReviews]);
-
-
+  }, [id, getReviews]);
 
   return (
-    <div className="bg-gray-50 min-h-screen">
+    <div className="bg-gray-50 min-h-screen px-6 sm:px-10 ">
       {loading ? (
         <div className="w-full flex justify-center items-center h-screen">
           <span className="loading loading-spinner text-info text-6xl"></span>
         </div>
       ) : (
-        <div className="container mx-auto px-4 py-8">
-          <div className="flex flex-col  lg:flex-row gap-8">
-            {/* Product Images */}
-            <div className="lg:w-1/2">
-              <ImageGallery images={product?.images} />
+        <div className="container mx-auto py-8">
+          <div className="flex flex-col lg:flex-row gap-8">
+            {/* Left Side - 80% */}
+            <div className="flex flex-col lg:flex-[4] gap-8">
+              {/* Product Images & Details */}
+              <div className="flex flex-col md:flex-row gap-6">
+                {/* Product Images */}
+                <div className="w-full md:w-1/2">
+                  <ImageGallery images={product?.images} />
+                </div>
+
+                {/* Product Details */}
+                <div className="w-full md:w-1/2">
+                  <ProductDetails
+                    product={product}
+                    rating={reviews?.length || 0}
+                  />
+                </div>
+              </div>
             </div>
-            {/* Product Details */}
-            <ProductDetails product={product} rating={reviews?.length || 0} />
+
+            {/* Right Side - Promo Banner 20% */}
+            <div className="lg:flex-[1] w-full">
+              <PromoBanner />
+            </div>
           </div>
 
           {/* Review Section */}
@@ -71,7 +83,7 @@ const ProductViewPage = () => {
                 </button>
               </nav>
             </div>
-            <div className="p-6 flex justify-center gap-10">
+            <div className="p-6 flex-row sm:flex-col justify-center gap-5 sm:gap-10">
               <ReviewPage
                 product={product}
                 reviews={reviews}
@@ -82,7 +94,6 @@ const ProductViewPage = () => {
           </div>
 
           <RelatedProducts product={product} />
-        
         </div>
       )}
     </div>

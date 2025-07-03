@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 import useAuthContext from "../hooks/useAuthContext";
+import { Link } from "react-router";
 
 const LoginPage = () => {
   const {
@@ -13,13 +14,20 @@ const LoginPage = () => {
     logIn(data);
   };
 
+  const handleAdminLogin = ()=> {
+    logIn({
+      email: "parthokumarmondal90@gmail.com",
+      password : "Password@12",
+    })
+  }
+
   return (
     <div className="h-full relative font-['Poppins']">
       <div
         className="bg-cover bg-center bg-no-repeat"
         style={{
           backgroundImage:
-            "url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')",
+            "url('https://res.cloudinary.com/dinzf10l3/image/upload/v1751517821/510026_ybwhk9.jpg')",
         }}
       >
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-black/70" />
@@ -91,13 +99,22 @@ const LoginPage = () => {
                 </button>
               </form>
 
+              <div className=" mt-3 flex gap-3">
+              <button
+                  onClick={handleAdminLogin}
+                  className="w-full py-2 bg-white/20 font-bold text-white rounded-lg hover:bg-white/30 transition duration-200"
+                >
+                  Admin Credential
+                </button>
+              </div>
+
               <div className="mt-6 text-center">
-                <p className="text-white/70">
+                <div className="text-white/70">
                   Don't have an account?{" "}
-                  <a href="#" className="text-white hover:underline">
+                  <Link to="/registration"><p href="#" className="text-white hover:underline">
                     Sign up
-                  </a>
-                </p>
+                  </p></Link>
+                </div>
               </div>
             </div>
           </div>

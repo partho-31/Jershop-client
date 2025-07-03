@@ -109,11 +109,17 @@ const useAuth = () => {
   };
 
   const logOut = async () => {
-    localStorage.removeItem("authToken");
-    setUser(null);
-    setAuthToken(null);
+    try {
+      localStorage.removeItem("authToken");
+      setUser(null);
+    } catch (error) {
+      return { "error": error}
+    } finally {
+      navigate("/");
+    }
+    return { success: true, message : "User sign out successful" };
   };
-
+  
   const forgetPassword = async (data) => {
     setLoading(true);
     try {

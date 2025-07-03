@@ -6,8 +6,9 @@ const DashboardLayout = () => {
   return (
     <>
         
-      <DashNav/>
-      <Outlet />
+      <DashNav>
+        <Outlet />
+      </DashNav>
       <Footer />
 
     </>

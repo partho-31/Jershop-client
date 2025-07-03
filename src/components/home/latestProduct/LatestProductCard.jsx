@@ -3,7 +3,6 @@ import useCartContext from "../../../hooks/useCartContext";
 import { toast } from "react-toastify";
 import { FaShoppingCart } from "react-icons/fa";
 
-
 const LatestProductCard = ({ product }) => {
   const { addCartItems, loading } = useCartContext();
 
@@ -17,32 +16,28 @@ const LatestProductCard = ({ product }) => {
   };
 
   return (
-    <div className="w-full max-w-4xl mt-20 mx-auto bg-white rounded-xl shadow-2xl overflow-hidden transition-all duration-300 hover:shadow-3xl hover:-translate-y-1">
+    <div className="w-full max-w-5xl mt-10 mx-auto bg-white rounded-2xl shadow-2xl overflow-hidden transition-all duration-300 hover:shadow-3xl hover:-translate-y-1">
       <div className="flex flex-col md:flex-row">
-        {/* Product Image  */}
-        <div className="md:w-1/2 relative">
+        {/* Product Image */}
+        <div className="md:w-1/2 w-full h-60 md:h-auto relative">
           <img
-            src="https://res.cloudinary.com/dvyz3blnz/image/upload/v1750795957/new_cristiano_ronaldo_al_nassr_1695738518_89ac811d_progressive_u8uyrw.jpg"
+            src={product?.images?.at(-1)?.image}
             alt={product.name}
-            className="absolute inset-0 w-full h-full object-cover"
-          />   
+            className="absolute inset-0 w-full h-full object-cover rounded-t-2xl md:rounded-l-2xl md:rounded-t-none"
+          />
         </div>
 
         {/* Product Content */}
-        <div className="md:w-1/2 p-8 flex flex-col justify-between">
+        <div className="md:w-1/2 w-full p-4 sm:p-8 flex flex-col justify-between bg-white">
           <div>
-            {/* Category Tag */}
-            <span className="inline-block px-3 py-1 text-xs font-semibold text-gray-700 bg-gray-100 rounded-full mb-4">
-              {product?.category?.name} • Player Edition
-            </span>
 
             {/* Product Title */}
-            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
+            <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-1 sm:mb-3">
               {product.name}
             </h3>
 
             {/* Star Rating */}
-            <div className="flex items-center mb-4">
+            <div className="flex items-center mb-2 sm:mb-4">
               <div className="flex mr-2">
                 {[...Array(5)].map((_, i) =>
                   i < product.ratings ? (
@@ -58,19 +53,19 @@ const LatestProductCard = ({ product }) => {
             </div>
 
             {/* Product Description */}
-            <p className="text-gray-600 mb-6">
+            <p className="text-gray-600 text-sm sm:text-base mb-2 sm:mb-6">
               Premium quality jersey with moisture-wicking fabric and
-              embroidered logos.
+              embroidered logos. Perfect for loyal fans and collectors.
             </p>
           </div>
 
           {/* Price and CTA */}
           <div>
-            <div className="flex items-center mb-6">
-              <p className="text-3xl font-extrabold text-gray-900">
+            <div className="flex items-center mb-4 sm:mb-6">
+              <p className="text-2xl sm:text-3xl font-extrabold text-blue-500">
                 BDT {product.final_price}
               </p>
-              <span className="ml-2 text-lg text-gray-500 line-through">
+              <span className="ml-3 text-lg text-gray-400 line-through">
                 BDT {product.price}
               </span>
             </div>
@@ -79,7 +74,7 @@ const LatestProductCard = ({ product }) => {
               <button
                 onClick={() => handleAddToCart(product.id, 1)}
                 disabled={loading}
-                className="flex-1 bg-gray-900 hover:bg-gray-800 text-white py-3 px-6 rounded-lg font-medium transition-all duration-300 flex items-center justify-center shadow-md hover:shadow-lg"
+                className="flex-1 bg-blue-400 hover:bg-blue-500 text-white py-3 px-6 rounded-lg font-medium transition-all duration-300 flex items-center justify-center shadow-md hover:shadow-lg"
               >
                 {loading ? (
                   <span className="loading loading-spinner loading-md"></span>

@@ -1,145 +1,158 @@
-import * as React from 'react';
-import { styled, useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import Drawer from '@mui/material/Drawer';
-import CssBaseline from '@mui/material/CssBaseline';
-import MuiAppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import List from '@mui/material/List';
-import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
-import SideBar from '../components/dashboard/Menu/SideBar';
+import { useState, useEffect, useRef } from "react";
+import { FaShoppingCart, FaBars, FaTimes } from "react-icons/fa";
+import SideBar from "../components/dashboard/Menu/SideBar";
+import { IoCartOutline, IoFootball } from "react-icons/io5";
+import useAuthContext from "../hooks/useAuthContext";
+import useCartContext from "../hooks/useCartContext";
+import { Link } from "react-router";
 
-const drawerWidth = 240;
+const DashNav = ({ children }) => {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const sidebarRef = useRef(null);
+  const { user } = useAuthContext();
+  const { cart, createOrGetCart } = useCartContext();
 
-const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
-  ({ theme }) => ({
-    flexGrow: 1,
-    padding: theme.spacing(3),
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    marginLeft: `-${drawerWidth}px`,
-    variants: [
-      {
-        props: ({ open }) => open,
-        style: {
-          transition: theme.transitions.create('margin', {
-            easing: theme.transitions.easing.easeOut,
-            duration: theme.transitions.duration.enteringScreen,
-          }),
-          marginLeft: 0,
-        },
-      },
-    ],
-  }),
-);
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        window.innerWidth < 640 &&
+        sidebarRef.current &&
+        !sidebarRef.current.contains(event.target)
+      ) {
+        setSidebarOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
-const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== 'open',
-})(({ theme }) => ({
-  transition: theme.transitions.create(['margin', 'width'], {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  variants: [
-    {
-      props: ({ open }) => open,
-      style: {
-        width: `calc(100% - ${drawerWidth}px)`,
-        marginLeft: `${drawerWidth}px`,
-        transition: theme.transitions.create(['margin', 'width'], {
-          easing: theme.transitions.easing.easeOut,
-          duration: theme.transitions.duration.enteringScreen,
-        }),
-      },
-    },
-  ],
-}));
-
-const DrawerHeader = styled('div')(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
-  ...theme.mixins.toolbar,
-  justifyContent: 'flex-end',
-}));
-
-export default function DashNav() {
-  const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
-
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 640) setSidebarOpen(false);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
-    <Box sx={{ display: 'flex' }}>
-      <CssBaseline />
-      <AppBar position="fixed" open={open}>
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            sx={[
-              {
-                mr: 2,
-              },
-              open && { display: 'none' },
-            ]}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Admin Dashboard
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <Drawer
-        sx={{
-          width: drawerWidth,
-          flexShrink: 0,
-          '& .MuiDrawer-paper': {
-            width: drawerWidth,
-            boxSizing: 'border-box',
-          },
-        }}
-        variant="persistent"
-        anchor="left"
-        open={open}
+    <div className="flex h-screen bg-gray-100 overflow-hidden">
+      {/* Mobile sidebar toggle button */}
+      <button
+        onClick={() => setSidebarOpen(!sidebarOpen)}
+        className="sm:hidden fixed top-4 left-4 z-50 bg-blue-600 text-white p-2 rounded-md"
       >
-        <DrawerHeader>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-          </IconButton>
-        </DrawerHeader>
-        <Divider />
-        <List>
-          <SideBar />
-        </List>
+        {sidebarOpen ? <FaTimes /> : <FaBars />}
+      </button>
+
+      {/* Fixed Sidebar */}
+      <aside
+        ref={sidebarRef}
+        className={`fixed sm:static z-40 w-64 h-full bg-white shadow-lg transform transition-transform duration-300
+          ${
+            sidebarOpen ? "translate-x-0" : "-translate-x-full sm:translate-x-0"
+          }`}
+      >
+        <div className="p-4 text-center shadow-lg flex items-center justify-center  text-lg font-bold text-blue-400">
+          <span className="text-3xl">G</span>
+          <IoFootball size={40} /> <span className="text-3xl">lazo!</span>
+        </div>
         
-      </Drawer>
-      <Main open={open}>
-        
-      </Main>
-    </Box>
+        {/* Sidebar Section */}
+        <SideBar />
+      </aside>
+
+      {/* Main Content Area */}
+      <div className="flex-1 flex flex-col overflow-hidden">
+        {/* Fixed Navbar */}
+        <header className="bg-white shadow-sm py-1 z-30">
+          <div className="px-4 py-3 flex justify-between items-center">
+            <h1 className="text-xl font-semibold">My Dashboard</h1>
+            <div className="navbar-end flex gap-2 items-center">
+              {/* Cart Dropdown */}
+              <div className="dropdown dropdown-end h-10 w-10">
+                <div
+                  tabIndex={0}
+                  role="button"
+                  className="btn btn-ghost bg-gray-200 btn-circle"
+                >
+                  <div className="indicator">
+                    <IoCartOutline className="h-5 w-5" />
+                    <span className="badge badge-xs border-0 bg-gray-300 indicator-item">
+                      {cart?.total_items || 0}
+                    </span>
+                  </div>
+                </div>
+                <div
+                  tabIndex={0}
+                  className="card card-compact dropdown-content bg-base-100 z-10 mt-3 w-52 shadow"
+                >
+                  <div className="card-body">
+                    <span className="text-lg font-bold">
+                      Items: {cart?.total_items || 0}
+                    </span>
+                    <span className="text-info">
+                      Subtotal: {cart?.total_amount || 0}
+                    </span>
+                    <Link to="/cart">
+                      <div className="card-actions">
+                        <button
+                          className="btn btn-primary btn-block"
+                          onClick={createOrGetCart}
+                        >
+                          View cart
+                        </button>
+                      </div>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+
+              {/* User Avatar Dropdown */}
+              <div className="dropdown dropdown-end h-10 w-10">
+                <div tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                  <div className="w-10 rounded-full">
+                    <img
+                      alt="User avatar"
+                      src={`https://res.cloudinary.com/dvyz3blnz/${user?.image}`}
+                    />
+                  </div>
+                </div>
+                <ul
+                  tabIndex={0}
+                  className="menu menu-sm dropdown-content bg-base-100 rounded-box z-10 mt-3 w-52 p-2 shadow"
+                >
+                  <li>
+                    <Link to="/dashboard" className="justify-between">
+                      Dashboard
+                    </Link>
+                  </li>
+                  <li>
+                    <a>Logout</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        {/* Scrollable Content */}
+        <main className="flex-1 overflow-auto p-4 bg-gray-50">
+          {children || (
+            <>
+              <h2 className="text-xl font-semibold mb-4">Welcome Back!</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {[1, 2, 3].map((item) => (
+                  <div key={item} className="bg-white p-4 rounded-lg shadow">
+                    Widget {item}
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
+        </main>
+      </div>
+    </div>
   );
-}
+};
+
+export default DashNav;

@@ -20,7 +20,8 @@ const HomePage = () => {
     });
   }, []);
 
-  const { latestProducts, loading, hotDeals,popularPicks} = useProductsContext();
+  const { latestProducts, loading, hotDeals, popularPicks } =
+    useProductsContext();
   const { categories } = useCategoryContext();
 
   return (
@@ -29,14 +30,15 @@ const HomePage = () => {
       <HeroSection />
 
       {/* Latest Products */}
-      <section className="px-14 my-20">
+      <section className="px-6 sm:px-14 my-10 sm:my-20">
         <div className="mx-auto">
-          <div className="flex justify-between items-center">
-            <h2 className="text-3xl font-bold ">Latest Arrivals 🔥</h2>
+          <div className="flex  sm:flex-row justify-between items-center sm:items-center gap-2 sm:gap-0">
+            <h2 className="text-xl sm:text-3xl font-bold text-gray-800">
+              Latest Arrivals 🔥
+            </h2>
             <Link to="products">
-              {" "}
               <button
-                className="btn btn-ghost text-blue-600 hover:text-blue-700"
+                className="btn btn-ghost text-blue-500 hover:text-blue-700 px-2 py-2 text-sm sm:text-base"
                 data-aos="fade-left"
               >
                 View All &rarr;
@@ -100,14 +102,15 @@ const HomePage = () => {
       </div>
 
       {/* Hot Deals */}
-      <section className="my-20 px-14">
-        <div className="">
-          <div className="flex justify-between items-center ">
-            <h2 className="text-3xl font-bold text-gray-900">Hot Deals 🔥</h2>
+      <section className="px-6 sm:px-14 my-10 sm:my-20">
+        <div className="mx-auto">
+           <div className="flex  sm:flex-row justify-between items-center sm:items-center gap-2 sm:gap-0">
+            <h2 className="text-xl sm:text-3xl font-bold text-gray-800">
+              Hot Deals 🔥
+            </h2>
             <Link to="products">
               <button
-                href="#"
-                className="btn btn-ghost text-blue-600 hover:text-blue-700"
+                className="btn btn-ghost text-blue-500 hover:text-blue-700 px-2 py-2 text-sm sm:text-base"
                 data-aos="fade-left"
               >
                 View All &rarr;
@@ -121,9 +124,9 @@ const HomePage = () => {
                 <span className="loading loading-spinner text-info"></span>
               </div>
             )}
-            <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 mt-10">
               {hotDeals.map((product) => (
-                <div key={product.id} className="mt-10">
+                <div key={product.id} >
                   <ProductCard product={product} />
                 </div>
               ))}
@@ -133,13 +136,13 @@ const HomePage = () => {
       </section>
 
       {/* Top Categories */}
-      <section className="">
-        <div className="px-14">
-          <h2 className="text-3xl my-20 font-bold text-gray-900 text-center">
+      <section className="px-6 sm:px-14 my-10 sm:my-20">
+        <div className="mx-auto">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 text-center">
             Shop By <span className="text-blue-400">Category</span>
           </h2>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 mt-10">
             {categories?.map((category) => (
               <div key={category.id}>
                 <CategoryCard category={category} />
@@ -150,15 +153,14 @@ const HomePage = () => {
       </section>
 
       {/* Popular Products */}
-      <section className="my-20 px-14">
-        <div className="">
+      <section className="px-6 sm:px-14 my-10 sm:my-20">
+        <div className="mx-auto">
           <div className="flex justify-between items-center ">
-            <h2 className="text-3xl font-bold text-gray-900">
+            <h2 className="text-xl sm:text-3xl font-bold text-gray-900">
               Popular Picks 🔥
             </h2>
             <Link to="products">
               <button
-                href="#"
                 className="btn btn-ghost text-blue-600 hover:text-blue-700"
                 data-aos="fade-left"
               >
@@ -173,9 +175,9 @@ const HomePage = () => {
                 <span className="loading loading-spinner text-info"></span>
               </div>
             )}
-            <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
+            <div className="grid grid-cols-1 mt-10 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
               {popularPicks.map((product) => (
-                <div key={product.id} className="mt-10">
+                <div key={product.id} >
                   <ProductCard product={product} />
                 </div>
               ))}

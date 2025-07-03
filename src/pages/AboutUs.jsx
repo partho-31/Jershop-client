@@ -1,4 +1,5 @@
 import { FaTshirt, FaShippingFast, FaLock, FaHeadset, FaStar, FaGlobeAmericas, FaUsers } from 'react-icons/fa';
+import { Link } from 'react-router';
 
 const AboutUs = () => {
   return (
@@ -7,11 +8,11 @@ const AboutUs = () => {
         {/* Hero Section */}
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-bold text-blue-900 mb-6">
-            About <span className="text-blue-600">JerseyShop</span>
+            About <span className="text-blue-600">Golazo!</span>
           </h1>
           <div className="w-20 h-1 bg-blue-600 mx-auto mb-6"></div>
           <p className="text-gray-700 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
-            JerseyShop is your go-to destination for premium, authentic, and stylish jerseys from your favorite teams across the globe.
+            Golazo is your go-to destination for premium, authentic, and stylish jerseys from your favorite teams across the globe.
             Whether you're a die-hard football fan or just love the look — we've got something for everyone.
           </p>
         </div>
@@ -90,9 +91,9 @@ const AboutUs = () => {
               Whether you're a seasoned supporter or just starting your fan journey, JerseyShop is here to gear you up.
               Join our community and wear your passion proudly.
             </p>
-            <button className="mt-4 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-full transition duration-300">
+           <Link to="/products"> <button className="mt-4 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-full transition duration-300">
               Shop Now
-            </button>
+            </button> </Link>
           </div>
         </div>
       </div>

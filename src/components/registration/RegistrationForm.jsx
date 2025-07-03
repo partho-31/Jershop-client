@@ -137,7 +137,7 @@ const RegistrationForm = () => {
         <div className="text-center mt-2">
           <p className="text-sm text-white/70">
             Already have an account?
-            <Link to="login">
+            <Link to="/login">
               <button className="hover:underline text-white/90 font-semibold">
                 Login
               </button>

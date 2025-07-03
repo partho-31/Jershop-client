@@ -1,7 +1,23 @@
 import EChartsReact from "echarts-for-react";
+import { useEffect, useState } from "react";
+import AuthAPiClient from "../../../services/AuthApiClient";
 
 const OrderChart = () => {
-  const ar = [111,38,52,46,10]
+
+  const [Overview,setOrderOverview] = useState(null) 
+
+  useEffect(()=>{
+    const fetchSalesReport = async ()=> {
+    try {
+      const response = await AuthAPiClient.get('/api/orders/overview/')
+      setOrderOverview(response.data)
+    } catch (error) {
+      return { "error" : error}
+    }
+  }
+  fetchSalesReport()
+  },[])
+
   const option = {
     title: {
       text: "Orders Overview",
@@ -21,12 +37,13 @@ const OrderChart = () => {
         type: "pie",
         radius: "50%",
         data: [
-          { value: ar[0], name: "Total Order", itemStyle: { color: "#5C6BC0" } }, 
-          { value: ar[1], name: "Not Paid", itemStyle: { color: "#FFC107" } },
-          { value: ar[2], name: "Paid", itemStyle: { color: "#2196F3" } },
-          { value: ar[3], name: "Delivered", itemStyle: { color: "#4CAF50" } }, 
-          { value: ar[4], name: "Canceled", itemStyle: { color: "#F44336" } },
+          { value: Overview?.order_overview.total, name: "Total Order", itemStyle: { color: "#5C6BC0" } }, 
+          { value: Overview?.order_overview.not_paid, name: "Not Paid", itemStyle: { color: "#FFC107" } },
+          { value: Overview?.order_overview.paid, name: "Paid", itemStyle: { color: "#2196F3" } },
+          { value: Overview?.order_overview.delivered, name: "Delivered", itemStyle: { color: "#4CAF50" } }, 
+          { value: Overview?.order_overview.canceled, name: "Canceled", itemStyle: { color: "#F44336" } },
         ],
+ 
         emphasis: {
           itemStyle: {
             shadowBlur: 10,

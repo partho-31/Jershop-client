@@ -35,25 +35,25 @@ const AppRoutes = () => {
         <Route path="about-us" element={<AboutUs/>} />
         <Route path="contact-us" element={<ContactUs/>} />
         <Route path="products" element={<ProductsPage />} />
-        <Route path="products/add" element={<AddProductForm />} />
         <Route path="products/:id" element={<ProductViewPage />} />
         <Route path="cart" element={<CartPage />} />
-        <Route path="orders" element={<OrderPage />} />
-        <Route path="addCategory" element={<AddCategoryForm/>} />
-      </Route>
-
-      <Route
+        </Route>
+        
+        <Route
         path="dashboard"
         element={
-         
-            <DashboardLayout />
-         
+          <PrivateRoutes>
+          <DashboardLayout />
+          </PrivateRoutes>
         }
-      >
+        >
         <Route index element={<AdminDashboard />} />
-      </Route>
-    </Routes>
-  );
-};
+        <Route path="orders" element={<OrderPage />} />
+        <Route path="addCategory" element={<AddCategoryForm/>} />
+        <Route path="products/add" element={<AddProductForm />} />
+        </Route>
+        </Routes>
+      );
+    };
 
 export default AppRoutes;

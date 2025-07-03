@@ -38,7 +38,7 @@ const ContactPage = () => {
         {/* Header Section */}
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-bold text-blue-900 mb-4">
-            Contact <span className="text-blue-600">JerseyShop</span>
+            Contact <span className="text-blue-600">Golazo!</span>
           </h1>
           <div className="w-20 h-1 bg-blue-600 mx-auto mb-6"></div>
           <p className="text-gray-700 text-lg max-w-3xl mx-auto">

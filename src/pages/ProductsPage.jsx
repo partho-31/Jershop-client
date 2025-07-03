@@ -7,8 +7,6 @@ const ProductsPage = () => {
   const [showMobileFilters, setShowMobileFilters] = useState(false);
   const { productsList, loading } = useProductsContext();
 
- 
-
   return (
     <div className="flex flex-col md:flex-row gap-8 bg-gray-200 py-10">
       <div className="w-full md:w-72">
@@ -24,7 +22,7 @@ const ProductsPage = () => {
       <div className="flex-1">
         {/* Results Count */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
-          <div className="text-gray-600">
+          <div className="text-gray-600 px-2">
             Showing{" "}
             <span className="font-medium text-gray-800">
               {productsList?.length}
@@ -42,7 +40,7 @@ const ProductsPage = () => {
                 <span className="loading loading-spinner text-info"></span>
               </div>
             )}
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 px-6">
               {productsList.map((product) => (
                 <div key={product.id}>
                   <ProductCard product={product} />
