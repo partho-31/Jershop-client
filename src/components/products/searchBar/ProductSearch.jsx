@@ -1,21 +1,45 @@
-
 import useCategoryContext from "../../../hooks/useCategoryContext";
-import { useState } from "react";
-import useProductsContext from "../../../hooks/useProductsContext";
-import { FiChevronDown, FiDollarSign, FiFilter, FiSearch, FiTag, FiX } from "react-icons/fi";
 
+import {
+  FiChevronDown,
+  FiDollarSign,
+  FiFilter,
+  FiSearch,
+  FiTag,
+  FiX,
+} from "react-icons/fi";
 
-const ProductSearch = ({showMobileFilters,handleMobileFilter}) => {
-  const [minPrice, setMinPrice] = useState(0);
-  const [maxPrice, setMaxPrice] = useState(1500);
-  const [sortOption, setSortOption] = useState("");
-
-
+const ProductSearch = ({
+  showMobileFilters,
+  handleMobileFilter,
+  minPrice,
+  setMinPrice,
+  maxPrice,
+  setMaxPrice,
+  searchByCategory,
+  setSearchByCategory,
+  searchByKeyword,
+  setSearchByKeyword,
+  ordering,
+  setOrdering,
+}) => {
   const { categories } = useCategoryContext();
-  const {searchByCategory,setSearchByCategory,searchByKeyword,setSearchByKeyword,} = useProductsContext()
 
-   const clearFilters = () => {
-    setSortOption("");
+  const orderingOptions = [
+    { option: "Newest First", value: "-created_at" },
+    { option: "Oldest First", value: "created_at" },
+    { option: "Price: High to Low", value: "-price" },
+    { option: "Price: Low to High", value: "price" },
+    { option: "Discount: High to Low", value: "-discount" },
+    { option: "Discount: Low to High", value: "discount" },
+  ];
+
+  const clearFiltering = () => {
+    setSearchByCategory(""),
+      setSearchByKeyword(""),
+      setOrdering(""),
+      setMaxPrice(3000),
+      setMinPrice(0);
   };
 
   return (
@@ -40,7 +64,7 @@ const ProductSearch = ({showMobileFilters,handleMobileFilter}) => {
               <FiFilter className="text-gray-500" /> Filters
             </h2>
             <button
-              onClick={clearFilters}
+              onClick={clearFiltering}
               className="text-sm text-blue-600 hover:text-blue-800 transition-colors"
             >
               Clear all
@@ -80,8 +104,8 @@ const ProductSearch = ({showMobileFilters,handleMobileFilter}) => {
                 value={searchByCategory}
                 onChange={(e) => setSearchByCategory(e.target.value)}
               >
-                <option value="" >{" "}All Categoris</option>
-                {categories.map((category,index) => (
+                <option value=""> All Categoris</option>
+                {categories.map((category, index) => (
                   <option key={index} value={category.id}>
                     {category.name}
                   </option>
@@ -96,13 +120,18 @@ const ProductSearch = ({showMobileFilters,handleMobileFilter}) => {
             <h3 className="font-medium text-gray-700 mb-2 flex items-center gap-2">
               <FiDollarSign className="text-gray-500" /> Price Range
             </h3>
+
+            {/* Numeric Inputs */}
             <div className="flex items-center gap-3 mb-3">
               <input
                 type="number"
-                min="0"
+                min={0}
                 max={maxPrice}
                 value={minPrice}
-                onChange={(e) => setMinPrice(Number(e.target.value))}
+                onChange={(e) => {
+                  const value = Number(e.target.value);
+                  setMinPrice(value <= maxPrice ? value : maxPrice);
+                }}
                 className="w-full p-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
                 placeholder="Min"
               />
@@ -110,37 +139,50 @@ const ProductSearch = ({showMobileFilters,handleMobileFilter}) => {
               <input
                 type="number"
                 min={minPrice}
-                max="1000"
+                max={3000}
                 value={maxPrice}
-                onChange={(e) => setMaxPrice(Number(e.target.value))}
+                onChange={(e) => {
+                  const value = Number(e.target.value);
+                  setMaxPrice(value >= minPrice ? value : minPrice);
+                }}
                 className="w-full p-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
                 placeholder="Max"
               />
             </div>
+
+            {/* Range Slider */}
             <div className="px-2">
               <input
                 type="range"
-                min="0"
-                max="500"
+                min={0}
+                max={3000}
+                step={50}
                 value={maxPrice}
-                onChange={(e) => setMaxPrice(Number(e.target.value))}
-                className="w-full h-1.5 bg-blue-100 rounded-lg appearance-none cursor-pointer"
+                onChange={(e) => {
+                  const value = Number(e.target.value);
+                  if (value >= minPrice) setMaxPrice(value);
+                }}
+                className="w-full h-1.5 bg-blue-100 rounded-lg cursor-pointer"
               />
             </div>
           </div>
 
           {/* Sorting */}
-            <div className="relative w-full sm:w-56 mb-8">
+          <div className="relative w-full sm:w-56 mb-8">
             <select
               className="w-full p-2 pl-3 pr-8 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 appearance-none bg-white transition-all"
-              value={sortOption}
-              onChange={(e) => setSortOption(e.target.value)}
+              value={ordering}
+              onChange={(e) => setOrdering(e.target.value)}
             >
-            <option>Newest First</option>
+              <option>Select Order</option>
+              {orderingOptions.map((option, index) => (
+                <option key={index} value={option.value}>
+                  {option.option}
+                </option>
+              ))}
             </select>
             <FiChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none" />
           </div>
-
         </div>
       </div>
     </div>

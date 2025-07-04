@@ -4,7 +4,7 @@ import SideBar from "../components/dashboard/Menu/SideBar";
 import { IoCartOutline, IoFootball } from "react-icons/io5";
 import useAuthContext from "../hooks/useAuthContext";
 import useCartContext from "../hooks/useCartContext";
-import { Link } from "react-router";
+import { Link, Links } from "react-router";
 
 const DashNav = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -35,11 +35,11 @@ const DashNav = ({ children }) => {
   }, []);
 
   return (
-    <div className="flex h-screen bg-gray-100 overflow-hidden">
+    <div className="flex h-screen bg-gray-100 sticky top-0 overflow-hidden">
       {/* Mobile sidebar toggle button */}
       <button
         onClick={() => setSidebarOpen(!sidebarOpen)}
-        className="sm:hidden fixed top-4 left-4 z-50 bg-blue-600 text-white p-2 rounded-md"
+        className="sm:hidden fixed top-5 left-4 z-50 bg-blue-600 text-white p-2 rounded-md"
       >
         {sidebarOpen ? <FaTimes /> : <FaBars />}
       </button>
@@ -56,7 +56,7 @@ const DashNav = ({ children }) => {
           <span className="text-3xl">G</span>
           <IoFootball size={40} /> <span className="text-3xl">lazo!</span>
         </div>
-        
+
         {/* Sidebar Section */}
         <SideBar />
       </aside>
@@ -66,7 +66,7 @@ const DashNav = ({ children }) => {
         {/* Fixed Navbar */}
         <header className="bg-white shadow-sm py-1 z-30">
           <div className="px-4 py-3 flex justify-between items-center">
-            <h1 className="text-xl font-semibold">My Dashboard</h1>
+            <h1 className="text-xl ps-10 font-semibold">Dashboard</h1>
             <div className="navbar-end flex gap-2 items-center">
               {/* Cart Dropdown */}
               <div className="dropdown dropdown-end h-10 w-10">
@@ -108,28 +108,15 @@ const DashNav = ({ children }) => {
               </div>
 
               {/* User Avatar Dropdown */}
-              <div className="dropdown dropdown-end h-10 w-10">
-                <div tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                  <div className="w-10 rounded-full">
+              <div className="h-10 w-10">
+                <div className="btn btn-ghost btn-circle avatar">
+                  <div className="w-10 border border-gray-400 rounded-full">
                     <img
                       alt="User avatar"
                       src={`https://res.cloudinary.com/dvyz3blnz/${user?.image}`}
                     />
                   </div>
                 </div>
-                <ul
-                  tabIndex={0}
-                  className="menu menu-sm dropdown-content bg-base-100 rounded-box z-10 mt-3 w-52 p-2 shadow"
-                >
-                  <li>
-                    <Link to="/dashboard" className="justify-between">
-                      Dashboard
-                    </Link>
-                  </li>
-                  <li>
-                    <a>Logout</a>
-                  </li>
-                </ul>
               </div>
             </div>
           </div>

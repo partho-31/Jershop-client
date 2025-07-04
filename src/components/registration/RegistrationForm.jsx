@@ -19,8 +19,8 @@ const RegistrationForm = () => {
 
   return (
     <div>
-      <form className="space-y-5" onSubmit={handleSubmit(handleClick)}>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <form className="space-y-2" onSubmit={handleSubmit(handleClick)}>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
           <div>
             <label className="block text-white/80 font-serif text-sm mb-1">
               First Name
@@ -29,7 +29,7 @@ const RegistrationForm = () => {
               {...register("first_name")}
               type="text"
               placeholder="John"
-              className="w-full px-4 py-2 bg-transparent text-white placeholder-white/70 rounded-lg border border-white/30 focus:outline-none"
+              className="w-full px-4 py-1 bg-transparent text-white placeholder-white/70 rounded-lg border border-white/30 focus:outline-none"
             />
           </div>
           <div>
@@ -40,7 +40,7 @@ const RegistrationForm = () => {
               {...register("last_name")}
               type="text"
               placeholder="Doe"
-              className="w-full px-4 py-2 bg-transparent text-white placeholder-white/70 rounded-lg border border-white/30 focus:outline-none"
+              className="w-full px-4 py-1 bg-transparent text-white placeholder-white/70 rounded-lg border border-white/30 focus:outline-none"
             />
           </div>
         </div>
@@ -53,7 +53,7 @@ const RegistrationForm = () => {
             {...register("email", { required: true })}
             type="email"
             placeholder="mail@site.com"
-            className="w-full px-4 py-2 bg-transparent text-white placeholder-white/70 rounded-lg border border-white/30 focus:outline-none"
+            className="w-full px-4 py-1 bg-transparent text-white placeholder-white/70 rounded-lg border border-white/30 focus:outline-none"
           />
           {errors.email && <p>Please enter valid email.</p>}
         </div>
@@ -66,7 +66,7 @@ const RegistrationForm = () => {
             {...register("password", { required: "Password is required!" })}
             type="password"
             placeholder="Password"
-            className="w-full px-4 py-2 bg-transparent text-white placeholder-white/70 rounded-lg border border-white/30 focus:outline-none"
+            className="w-full px-4 py-1 bg-transparent text-white placeholder-white/70 rounded-lg border border-white/30 focus:outline-none"
             required
             minLength="8"
             pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
@@ -89,7 +89,7 @@ const RegistrationForm = () => {
             })}
             type="password"
             placeholder="Password"
-            className="w-full px-4 py-2 bg-transparent text-white placeholder-white/70 rounded-lg border border-white/30 focus:outline-none"
+            className="w-full px-4 py-1 bg-transparent text-white placeholder-white/70 rounded-lg border border-white/30 focus:outline-none"
             required
             minLength="8"
             pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
@@ -109,7 +109,7 @@ const RegistrationForm = () => {
           <input
             {...register("phone_number", { required: true })}
             placeholder="+880 1712 345678"
-            className="w-full px-4 py-2 bg-transparent text-white placeholder-white/70 rounded-lg border border-white/30 focus:outline-none"
+            className="w-full px-4 py-1 bg-transparent text-white placeholder-white/70 rounded-lg border border-white/30 focus:outline-none"
           />
           {errors.phone_number && <p>Please enter valid number!</p>}
         </div>
@@ -121,8 +121,8 @@ const RegistrationForm = () => {
           <textarea
             {...register("address")}
             placeholder="Your address"
-            rows="3"
-            className="w-full px-4 py-2 bg-transparent text-white placeholder-white/70 rounded-lg border border-white/30 focus:outline-none resize-none"
+            rows="2"
+            className="w-full px-4 py-1 bg-transparent text-white placeholder-white/70 rounded-lg border border-white/30 focus:outline-none resize-none"
           />
         </div>
 

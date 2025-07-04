@@ -38,7 +38,6 @@ const RecentOrders = () => {
         return "bg-gray-100 text-orange-800";
     }
   };
-  console.log(orders);
   return (
     <div className="bg-white rounded-xl shadow-sm overflow-hidden w-4/5 mx-auto my-16">
       <div className="px-6 py-4 border-b bg-gray-200 border-gray-200 flex justify-between items-center">

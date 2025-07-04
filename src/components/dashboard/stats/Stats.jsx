@@ -45,7 +45,7 @@ const Stats = () => {
           </div>
           <div>
             <p className="text-gray-500 text-sm">Weekly Sales</p>
-            <p className="text-2xl font-bold">{salesReport?.Sales_data?.weekly_sales}</p>
+            <p className="text-2xl font-bold">{salesReport?.Sales_data?.weekly_sales || 0}</p>
           </div>
         </div>
       </div>
@@ -57,8 +57,7 @@ const Stats = () => {
           </div>
           <div>
             <p className="text-gray-500 text-sm">Total Orders</p>
-            <p className="text-2xl font-bold">{orderOverview?.order_overview.total
-}</p>
+            <p className="text-2xl font-bold">{orderOverview?.order_overview.total}</p>
           </div>
         </div>
       </div>

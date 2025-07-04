@@ -27,6 +27,15 @@ const useAuth = () => {
     setLoading(true);
     try {
       await ApiClient.post("/auth/users/", data);
+      toast.success(
+        "A message is sent to your email. Please click on the activation link to activate your account!",
+        {
+          position: "top-center",
+          style: {
+            width: "400px",
+          },
+        }
+      );
     } catch (error) {
       showErrorToast();
       return {
@@ -43,9 +52,8 @@ const useAuth = () => {
   const activeAccViaEmail = async (uid, token) => {
     try {
       await ApiClient.post("/auth/users/activation/", { uid, token });
-      return { success: true, message: "Account active successful" };
+      return { success: true, message: "Account active successfully! Please login" };
     } catch (error) {
-      showErrorToast();
       return {
         success: false,
         message: "activation failed",
@@ -113,13 +121,13 @@ const useAuth = () => {
       localStorage.removeItem("authToken");
       setUser(null);
     } catch (error) {
-      return { "error": error}
+      return { error: error };
     } finally {
       navigate("/");
     }
-    return { success: true, message : "User sign out successful" };
+    return { success: true, message: "User sign out successful" };
   };
-  
+
   const forgetPassword = async (data) => {
     setLoading(true);
     try {
@@ -180,6 +188,7 @@ const useAuth = () => {
 
   return {
     user,
+    setUser,
     orders,
     registration,
     activeAccViaEmail,

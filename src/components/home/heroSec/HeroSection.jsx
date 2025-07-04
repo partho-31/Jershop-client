@@ -18,7 +18,7 @@ const HeroSection = () => {
       {/* Text Content - Left Side */}
       <div className="relative z-10 flex items-center justify-center w-full lg:w-1/2 text-neutral-content py-10">
         <div className="max-w-2xl w-full text-center lg:text-left">
-          <div className="badge badge-accent bg-teal-300 my-4 mx-auto lg:mx-0">
+          <div className="badge badge-accent bg-teal-300 my-6 mx-auto lg:mx-0">
             NEW COLLECTION
           </div>
           <h1 className="mb-6 text-3xl text-gray-200 sm:text-5xl md:text-6xl font-bold leading-tight">
@@ -26,7 +26,7 @@ const HeroSection = () => {
             <br />
             For True Fans
           </h1>
-          <p className="mb-8 text-lg sm:text-xl text-white/80 font-semibold">
+          <p className="mb-10 text-lg sm:text-xl text-white/80 font-semibold">
             Officially licensed jerseys from FIFA, NBA, ICC and more. <br />
             100% authentic or your money back. Grab the best deals now
           </p>

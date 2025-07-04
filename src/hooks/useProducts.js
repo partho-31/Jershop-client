@@ -11,7 +11,7 @@ const useProducts = () => {
   const [loading, setLoading] = useState(false);
   const [searchByCategory, setSearchByCategory] = useState("");
   const [searchByKeyword, setSearchByKeyword] = useState("");
-
+  const [ordering, setOrdering] = useState("");
 
   const showErrorToast = () => {
     toast.error("Something went wrong! Please try again later", {
@@ -86,18 +86,18 @@ const useProducts = () => {
     }
   };
 
-
-
   useEffect(() => {
     const getProductsList = async () => {
       setLoading(true);
       try {
-        const response = await ApiClient.get(
-          `/api/products/?category=${searchByCategory}&search=${searchByKeyword}`
+        const response = await ApiClient.get("/api/products/");
+        const fetchedProducts = response.data;
+        setHotDeals(
+          fetchedProducts.slice().sort((a, b) => b.discount - a.discount)
         );
-        const fetchedProducts = response.data
-        setHotDeals(fetchedProducts.slice().sort((a,b)=>  b.discount - a.discount))
-        setPopularPicks(fetchedProducts.slice().sort((a,b)=>  b.ratings - a.ratings))
+        setPopularPicks(
+          fetchedProducts.slice().sort((a, b) => b.ratings - a.ratings)
+        );
         setProductsList(fetchedProducts);
       } catch (error) {
         return {
@@ -111,7 +111,7 @@ const useProducts = () => {
     };
     getProductsList();
     getLatestProducts();
-  }, [searchByCategory, searchByKeyword]);
+  }, []);
 
   return {
     productsList,
@@ -124,6 +124,8 @@ const useProducts = () => {
     setSearchByCategory,
     searchByKeyword,
     setSearchByKeyword,
+    ordering,
+    setOrdering,
     loading,
     hotDeals,
     popularPicks,

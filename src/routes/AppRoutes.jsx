@@ -17,6 +17,13 @@ import AddProductForm from "../components/products/form/AddProductForm";
 import AddCategoryForm from "../components/category/AddCategoryForm";
 import AboutUs from "../pages/AboutUs";
 import ContactUs from "../pages/ContactUs";
+import ResetPasswordConfirm from "../pages/ResetPasswordConfirm";
+import ForgetPassword from "../pages/ForgetPassword";
+import PasswordChange from "../pages/PasswordChange";
+import PhotoUpload from "../components/products/Gallary/PhotoUpload";
+import UserProfilePage from "../components/dashboard/profile/UserProfilePage";
+import EditProfileForm from "../components/dashboard/profile/EditProfileForm";
+
 
 const AppRoutes = () => {
   return (
@@ -27,16 +34,18 @@ const AppRoutes = () => {
         <Route path="login" element={<LoginPage />} />
         <Route path="activate/:uid/:token/" element={<ActivateAcc />} />
         <Route path="payment/success/" element={<PaymentSuccess />} />
-        {/* <Route path="forgetPassword" element={<ForgetPassword />} />
         <Route
           path="/password/reset/confirm/:uid/:token"
           element={<ResetPasswordConfirm />}
-        /> */}
-        <Route path="about-us" element={<AboutUs/>} />
-        <Route path="contact-us" element={<ContactUs/>} />
+        />
+        <Route path="/forgetPassword" element={<ForgetPassword />} />
+        <Route path="about-us" element={<AboutUs />} />
+        <Route path="contact-us" element={<ContactUs />} />
         <Route path="products" element={<ProductsPage />} />
         <Route path="products/:id" element={<ProductViewPage />} />
         <Route path="cart" element={<CartPage />} />
+        <Route path="products/:id/add-product_image" element={<PhotoUpload />} />
+        
         </Route>
         
         <Route
@@ -48,12 +57,15 @@ const AppRoutes = () => {
         }
         >
         <Route index element={<AdminDashboard />} />
-        <Route path="orders" element={<OrderPage />} />
-        <Route path="addCategory" element={<AddCategoryForm/>} />
+        <Route path="profile" element={<UserProfilePage />} />
+        <Route path="profile/edit" element={<EditProfileForm/>} />
+        <Route path="passwordChange" element={<PasswordChange />} />
+        <Route path="addCategory" element={<AddCategoryForm />} />
         <Route path="products/add" element={<AddProductForm />} />
-        </Route>
-        </Routes>
-      );
-    };
+        <Route path="orders" element={<OrderPage />} />
+      </Route>
+    </Routes>
+  );
+};
 
 export default AppRoutes;

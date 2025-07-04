@@ -69,7 +69,7 @@ const SideBar = () => {
         </Link>
 
         {/* Change Password  */}
-        <Link to="changePassword">
+        <Link to="passwordChange">
           <div className="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-400">
             <FaKey className="text-lg" />
             <span>Change Password</span>

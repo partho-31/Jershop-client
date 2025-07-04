@@ -1,23 +1,31 @@
 import { useState, useEffect } from "react";
+import { FiEdit } from "react-icons/fi";
+import { Link } from "react-router";
 
 const ImageGallery = ({ images = [] }) => {
   const [mainImage, setMainImage] = useState(images[0]?.image);
 
   useEffect(() => {
     if (images.length > 0) {
-      setMainImage(images[0].image);
+      setMainImage(images.at(-1).image);
     }
   }, [images]);
 
   return (
-    <div className="w-full h-3/4 flex flex-col gap-4 mt-7 justify-center ">
+    <div className="w-full h-3/4 flex  flex-col gap-4 justify-center ">
       {/*  Main Image */}
-      <div className="w-full h-[300px] sm:h-[600px] lg:h-[650px] rounded-xl overflow-hidden border border-gray-200 shadow-sm">
+      <div className="relative w-full h-[300px] sm:h-[600px] lg:h-[650px] rounded-xl overflow-hidden border border-gray-200 shadow-sm">
         <img
-          src={mainImage || "/placeholder-image.jpg"}
+          src={mainImage}
           alt="Main Product"
           className="w-full h-full object-fill transition-all duration-500 ease-in-out"
         />
+
+        <Link to="add-product_image">
+          <div className="absolute bottom-4 right-4 bg-blue-400 p-2 rounded-full shadow-md hover:bg-blue-500 transition text-white">
+            <FiEdit className="h-5 w-5" />
+          </div>
+        </Link>
       </div>
 
       {/* Thumbnail Images */}

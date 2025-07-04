@@ -5,11 +5,11 @@ import useCartContext from "../hooks/useCartContext";
 import { IoCartOutline, IoFootball } from "react-icons/io5";
 
 const Navbar = () => {
-  const { user } = useAuthContext();
-  const { cart, createOrGetCart, logOut } = useCartContext();
+  const { user,logOut } = useAuthContext();
+  const { cart, createOrGetCart } = useCartContext();
 
   return (
-    <div className="navbar bg-white shadow-lg  sm:px-8 ">
+    <div className="navbar sticky top-0 z-30 bg-white shadow-lg  sm:px-8 ">
       <div className="navbar-start ">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -47,7 +47,7 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
-        <div className="-ml-3 sm:p-4 text-center flex items-center justify-center text-lg font-bold text-blue-400">
+        <div className="-ml-3 sm:m-0 text-center flex items-center justify-center text-lg font-bold text-blue-400">
           <span className="text-3xl">G</span>
           <IoFootball size={40} /> <span className="text-3xl">lazo!</span>
         </div>
@@ -74,14 +74,13 @@ const Navbar = () => {
           <Link to="login">
             <button className="flex items-center text-md gap-1 px-2 py-1 text-black/70 rounded-lg hover:bg-gray-300 transition duration-200">
               <FaSignInAlt />
-             <span className="hidden sm:inline"> Login</span>
+              <span className="hidden sm:inline"> Login</span>
             </button>
           </Link>
           <Link to="registration">
             <button className="flex items-center text-md gap-1 px-2 py-1 text-black/70 rounded-lg hover:bg-gray-300 transition duration-200">
               <FaUserPlus />
-                           <span className="hidden sm:inline"> SignUp</span>
-
+              <span className="hidden sm:inline"> SignUp</span>
             </button>
           </Link>
         </div>
@@ -129,26 +128,26 @@ const Navbar = () => {
           {/* User Avatar Dropdown */}
           <div className="dropdown dropdown-end h-10 w-10">
             <div tabIndex={0} className="btn btn-ghost btn-circle avatar">
-              <div className="w-10 rounded-full">
+              <div className="w-10 border border-gray-400 rounded-full">
                 <img
                   alt="User avatar"
                   src={`https://res.cloudinary.com/dvyz3blnz/${user.image}`}
+                  className="w-10 h-10 object-contain"
                 />
               </div>
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-10 mt-3 w-52 p-2 shadow"
+              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
             >
+              <Link to="dashboard">
+                <li>
+                  <button className="justify-between">Dashboard</button>
+                </li>{" "}
+              </Link>
+              
               <li>
-                <Link to="/dashboard" className="justify-between">
-                  Dashboard
-                </Link>
-              </li>
-              <li>
-                <div onClick={logOut} className="cursor-pointer">
-                  Sign Out
-                </div>
+                <button onClick={logOut}>Sign Out</button>
               </li>
             </ul>
           </div>

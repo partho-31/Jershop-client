@@ -14,15 +14,22 @@ const LoginPage = () => {
     logIn(data);
   };
 
-  const handleAdminLogin = ()=> {
+  const handleAdminLogin = () => {
     logIn({
       email: "parthokumarmondal90@gmail.com",
-      password : "Password@12",
-    })
-  }
+      password: "Password@12",
+    });
+  };
+  
+  const handleUserLogin = () => {
+    logIn({
+      email: "64or02bp8g@xkxkud.com",
+      password: "Password@12",
+    });
+  };
 
   return (
-    <div className="h-full relative font-['Poppins']">
+    <div className="h-lvh relative font-['Poppins']">
       <div
         className="bg-cover bg-center bg-no-repeat"
         style={{
@@ -32,17 +39,17 @@ const LoginPage = () => {
       >
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-black/70" />
 
-        <div className="relative flex items-center justify-center min-h-screen px-4 z-10">
-          <div className="glass-card w-full max-w-md bg-white/10 rounded-2xl shadow-xl border border-white/20 transition-all duration-500 hover:shadow-2xl backdrop-blur-lg">
-            <div className="p-8">
-              <div className="text-center mb-8">
+        <div className="relative flex items-center justify-center min-h-screen px-3 z-10">
+          <div className="glass-card w-full max-w-md bg-white/5 rounded-2xl shadow-xl border border-white/20 transition-all duration-500 hover:shadow-2xl backdrop-blur-lg">
+            <div className="p-3 sm:p-6">
+              <div className="text-center mb-4 sm:mb-8">
                 <h2 className="text-3xl font-bold text-white mb-2">
                   Welcome Back
                 </h2>
                 <p className="text-white/70">Sign in to your account</p>
               </div>
 
-              <form className="space-y-5" onSubmit={handleSubmit(onSubmit)}>
+              <form className="space-y-3" onSubmit={handleSubmit(onSubmit)}>
                 <div>
                   <label className="block text-white/80 font-serif   text-sm mb-1">
                     Your Email
@@ -100,20 +107,28 @@ const LoginPage = () => {
               </form>
 
               <div className=" mt-3 flex gap-3">
-              <button
+                <button
                   onClick={handleAdminLogin}
                   className="w-full py-2 bg-white/20 font-bold text-white rounded-lg hover:bg-white/30 transition duration-200"
                 >
                   Admin Credential
                 </button>
+                <button
+                  onClick={handleUserLogin}
+                  className="w-full py-2 bg-white/20 font-bold text-white rounded-lg hover:bg-white/30 transition duration-200"
+                >
+                  User Credential
+                </button>
               </div>
 
               <div className="mt-6 text-center">
-                <div className="text-white/70">
+                <div className="text-white/70 flex justify-center gap-1">
                   Don't have an account?{" "}
-                  <Link to="/registration"><p href="#" className="text-white hover:underline">
-                    Sign up
-                  </p></Link>
+                  <Link to="/registration">
+                    <p className="text-white hover:underline">
+                      Sign up
+                    </p>
+                  </Link>
                 </div>
               </div>
             </div>

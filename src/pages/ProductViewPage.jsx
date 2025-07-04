@@ -83,7 +83,7 @@ const ProductViewPage = () => {
                 </button>
               </nav>
             </div>
-            <div className="p-6 flex-row sm:flex-col justify-center gap-5 sm:gap-10">
+            <div className="p-6 flex flex-col sm:flex-row justify-center gap-5 sm:gap-10">
               <ReviewPage
                 product={product}
                 reviews={reviews}
