@@ -19,9 +19,12 @@ import {
 import { RiStarFill, RiStarLine } from "react-icons/ri";
 import useCartContext from "../../../hooks/useCartContext";
 import { toast } from "react-toastify";
+import AuthAPiClient from "../../../services/AuthApiClient";
+import { useState } from "react";
 
 const ProductDetails = ({ product, rating }) => {
   const { addCartItems, loading } = useCartContext();
+  const [loader, setLoader] = useState(false);
 
   const handleAddToCart = async (id, quantity) => {
     const response = await addCartItems(id, quantity);
@@ -32,13 +35,32 @@ const ProductDetails = ({ product, rating }) => {
     }
   };
 
+  const handlePayment = async () => {
+    const total = product?.final_price + 20;
+    setLoader(true);
+    try {
+      const response = await AuthAPiClient.post("/api/payment/initiate/", {
+        total_amount: total,
+      });
+      if (response.data.payment_url) {
+        window.location.href = response.data.payment_url;
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoader(true);
+    }
+  };
+
   return (
     <div className="w-full">
       <div className="bg-white rounded-xl shadow-sm overflow-hidden p-4 sm:p-6 hover:shadow-md transition duration-300">
         {/* Title & Rating */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-2">
           <div>
-            <h1 className="text-xl sm:text-3xl font-bold text-gray-900 mb-1">{product?.name}</h1>
+            <h1 className="text-xl sm:text-3xl font-bold text-gray-900 mb-1">
+              {product?.name}
+            </h1>
             <div className="flex items-center gap-1">
               {[...Array(5)].map((_, i) =>
                 i < product?.ratings ? (
@@ -94,7 +116,8 @@ const ProductDetails = ({ product, rating }) => {
 
           <div className="bg-gray-50 p-3 rounded-lg">
             <h3 className="text-xs  text-gray-500 uppercase tracking-wider">
-              <FaWarehouse className="inline mr-1" />Remaining
+              <FaWarehouse className="inline mr-1" />
+              Remaining
             </h3>
             <p className="text-gray-800 font-medium mt-1">
               {product?.remaining} in pices
@@ -124,14 +147,26 @@ const ProductDetails = ({ product, rating }) => {
             <h3 className="text-xs font-medium text-gray-500 uppercase tracking-wider">
               <FaCalendarAlt className="inline mr-1" /> Added On
             </h3>
-            <p className="text-gray-800 text-sm mt-1">{new Date(product?.created_at).toLocaleDateString()}</p>
+            <p className="text-gray-800 text-sm mt-1">
+              {new Date(product?.created_at).toLocaleDateString()}
+            </p>
           </div>
         </div>
 
         {/* Buy/Add Buttons */}
         <div className="flex flex-col sm:flex-row items-stretch gap-4 mb-6">
-          <button className="flex-1 bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900 text-white py-3 px-6 rounded-lg font-medium transition-all duration-300 flex items-center justify-center shadow-md hover:shadow-lg">
-            <FaBolt className="mr-2" /> Buy Now
+          <button
+            disabled={loader}
+            onClick={handlePayment}
+            className="flex-1 bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900 text-white py-3 px-6 rounded-lg font-medium transition-all duration-300 flex items-center justify-center shadow-md hover:shadow-lg"
+          >
+            {loading ? (
+              <span className="loading loading-spinner loading-md"></span>
+            ) : (
+              <span className="flex items-center">
+                <FaBolt className="mr-2" /> Buy Now
+              </span>
+            )}
           </button>
           <button
             onClick={() => handleAddToCart(product.id, 1)}

@@ -5,7 +5,7 @@ import HeroSection from "../components/home/heroSec/HeroSection";
 import LatestProductCard from "../components/home/latestProduct/LatestProductCard";
 import CategoryCard from "../components/category/CategoryCard";
 import ProductCard from "../components/products/card/ProductCard";
-import { FaTag, FaFire } from "react-icons/fa";
+import { FaTag } from "react-icons/fa";
 import LimitedAddition from "../components/home/limitedAddition.jsx/LimitedAddition";
 import useProductsContext from "../hooks/useProductsContext";
 import useCategoryContext from "../hooks/useCategoryContext";
@@ -33,14 +33,11 @@ const HomePage = () => {
       <section className="px-6 sm:px-14 my-10 sm:my-20">
         <div className="mx-auto">
           <div className="flex  sm:flex-row justify-between items-center sm:items-center gap-2 sm:gap-0">
-            <h2 className="text-xl sm:text-3xl font-bold text-gray-800">
+            <h2 className="text-xl sm:text-3xl font-bold text-gray-600">
               Latest Arrivals 🔥
             </h2>
             <Link to="products">
-              <button
-                className="btn btn-ghost text-blue-500 hover:text-blue-700 px-2 py-2 text-sm sm:text-base"
-                data-aos="fade-left"
-              >
+              <button className="btn btn-ghost text-blue-500 hover:text-blue-700 px-2 py-2 text-sm sm:text-base">
                 View All &rarr;
               </button>
             </Link>
@@ -52,30 +49,25 @@ const HomePage = () => {
       </section>
 
       {/* Discount banner section  */}
-      <div className="relative bg-gradient-to-r from-orange-500 to-red-500 rounded-xl overflow-hidden shadow-lg group">
-        {/* Decorative elements */}
-        {/* <div className="absolute inset-0 opacity-10 bg-[url('https://assets.website-files.com/5e51b3b0337309d672efd94c/5e51b3b03373093d1aefda39_noise.png')]"></div> */}
-        <div className="absolute -right-10 -top-10 w-32 h-32 rounded-full bg-white/10"></div>
-        <div className="absolute -right-5 -bottom-5 w-20 h-20 rounded-full bg-white/10"></div>
-
-        {/* Content */}
+      <div className="relative bg-gray-400/50 rounded-xl shadow-md overflow-hidden group">
         <div className="relative z-10 p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="text-white">
+          <div>
             <div className="flex items-center gap-2 mb-2">
-              <FaTag className="text-yellow-300 text-xl" />
-              <span className="font-bold text-yellow-300 text-sm uppercase tracking-wider">
-                Limited Time
+              <FaTag className="text-blue-400 text-xl" />
+              <span className="font-bold text-blue-400 text-sm uppercase tracking-wider">
+                Limited Time Offer
               </span>
             </div>
-            <h3 className="text-2xl md:text-3xl font-bold mb-1">Summer Sale</h3>
-            <p className="text-blue-100">
-              Get up to 40% off on selected sports items
+            <h3 className="text-2xl md:text-3xl font-bold text-gray-600 mb-1">
+              Summer Sale
+            </h3>
+            <p className="text-gray-600">
+              Save up to 40% on premium sportswear and gear.
             </p>
           </div>
 
           <Link to="products">
-            {" "}
-            <button className="flex-shrink-0 px-6 py-3 bg-white text-blue-600 font-semibold rounded-lg shadow-md hover:bg-blue-50 hover:shadow-lg transition-all duration-300 transform group-hover:-translate-y-1 flex items-center gap-2">
+            <button className="px-6 py-3 bg-blue-400 text-white font-semibold rounded-lg shadow hover:bg-blue-500 transition-transform duration-300 transform group-hover:-translate-y-1 flex items-center gap-2">
               Shop Now
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -95,17 +87,17 @@ const HomePage = () => {
           </Link>
         </div>
 
-        {/* Discount percentage badge */}
-        <div className="absolute top-4 right-4 bg-yellow-400 text-blue-900 font-bold px-3 py-1 rounded-md text-sm shadow-lg transform rotate-6">
-          up to 40% OFF
+        {/* Discount Badge */}
+        <div className="absolute top-4 right-4 bg-blue-100 text-blue-600 font-semibold px-3 py-1 rounded-md text-sm shadow">
+          Up to 40% OFF
         </div>
       </div>
 
       {/* Hot Deals */}
       <section className="px-6 sm:px-14 my-10 sm:my-20">
-        <div className="mx-auto">
-           <div className="flex  sm:flex-row justify-between items-center sm:items-center gap-2 sm:gap-0">
-            <h2 className="text-xl sm:text-3xl font-bold text-gray-800">
+        <div className="mx-auto" data-aos="fade-up" data-aos-delay="300">
+          <div className="flex  sm:flex-row justify-between items-center sm:items-center gap-2 sm:gap-0">
+            <h2 className="text-xl sm:text-3xl font-bold text-gray-600">
               Hot Deals 🔥
             </h2>
             <Link to="products">
@@ -125,8 +117,8 @@ const HomePage = () => {
               </div>
             )}
             <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 mt-10">
-              {hotDeals.map((product) => (
-                <div key={product.id} >
+              {hotDeals.slice(0, 10).map((product) => (
+                <div key={product.id}>
                   <ProductCard product={product} />
                 </div>
               ))}
@@ -138,7 +130,7 @@ const HomePage = () => {
       {/* Top Categories */}
       <section className="px-6 sm:px-14 my-10 sm:my-20">
         <div className="mx-auto">
-          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 text-center">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-600 text-center">
             Shop By <span className="text-blue-400">Category</span>
           </h2>
 
@@ -153,10 +145,14 @@ const HomePage = () => {
       </section>
 
       {/* Popular Products */}
-      <section className="px-6 sm:px-14 my-10 sm:my-20">
+      <section
+        data-aos="fade-down"
+        data-aos-delay="300"
+        className="px-6 sm:px-14 my-10 sm:my-20"
+      >
         <div className="mx-auto">
           <div className="flex justify-between items-center ">
-            <h2 className="text-xl sm:text-3xl font-bold text-gray-900">
+            <h2 className="text-xl sm:text-3xl font-bold text-gray-600">
               Popular Picks 🔥
             </h2>
             <Link to="products">
@@ -176,8 +172,8 @@ const HomePage = () => {
               </div>
             )}
             <div className="grid grid-cols-1 mt-10 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-              {popularPicks.map((product) => (
-                <div key={product.id} >
+              {popularPicks.slice(0, 10).map((product) => (
+                <div key={product.id}>
                   <ProductCard product={product} />
                 </div>
               ))}

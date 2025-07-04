@@ -39,17 +39,20 @@ const AddCategoryForm = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screenpy-12 sm:my-10 px-2 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
-        <div className="text-center mb-10">
-          <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+        <div className="text-center mb-4 sm:mb-8">
+          <h2 className="text-2xl font-extrabold text-gray-600 sm:text-4xl">
             Add a new Category
           </h2>
-          <p className="mt-3 text-xl text-gray-600">
+          <p className="mt-3 text-lg sm:text-xl text-gray-500">
             Fill in the details to add a new category
           </p>
         </div>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="space-y-2.5 sm:space-y-8 bg-white p-6 sm:p-8 rounded-2xl shadow-xl border border-gray-100"
+        >
           {/* name */}
           <div className="sm:col-span-2">
             <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -66,9 +69,7 @@ const AddCategoryForm = () => {
               placeholder="Cricket"
             />
             {errors.name && (
-              <p className="mt-1 text-sm text-red-600">
-                Please provide a name
-              </p>
+              <p className="mt-1 text-sm text-red-600">Please provide a name</p>
             )}
           </div>
 
@@ -79,8 +80,8 @@ const AddCategoryForm = () => {
             </label>
             <textarea
               {...register("description", { required: true })}
-              rows={4}
-              className={`w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-indigo-500 focus:outline-none focus:ring-2`}
+              rows={3}
+              className={`w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-indigo-500 focus:outline-none focus:ring-2`}
               placeholder="About your category"
             />
           </div>
@@ -106,7 +107,7 @@ const AddCategoryForm = () => {
                 <div className="flex flex-col items-center justify-center pt-5 pb-6">
                   <FaCloudUploadAlt className="text-gray-400 text-2xl mb-1" />
                   <p className="mb-1 text-sm text-gray-500">
-                    Click to upload or drag and drop
+                    Click to upload 
                   </p>
                   <p className="text-xs text-gray-500">
                     PNG, JPG (MAX. 5MB each)

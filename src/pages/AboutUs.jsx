@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 
 const AboutUs = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white py-12 px-4 md:px-20">
+    <div className="min-h-screen bg-gray-200 py-12 px-4 md:px-20">
       <div className="max-w-5xl mx-auto">
         {/* Hero Section */}
         <div className="text-center mb-16">

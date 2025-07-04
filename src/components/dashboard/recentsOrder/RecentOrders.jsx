@@ -11,7 +11,7 @@ import useAuthContext from "../../../hooks/useAuthContext";
 import { Link } from "react-router";
 
 const RecentOrders = () => {
-  const { orders } = useAuthContext();
+  const { orders,user } = useAuthContext();
 
   const getStatusIcon = (status) => {
     switch (status) {
@@ -116,7 +116,7 @@ const RecentOrders = () => {
 
       <div className="px-6 py-3  flex justify-between items-center">
         <span className="text-xs md:text-sm text-gray-500">
-          Showing 3 of {orders?.length} orders
+         {user?.is_staff ? `Showing 3 of ${orders?.length} orders` : "Partial view of all entries."} 
         </span>
 
         <Link to="orders">

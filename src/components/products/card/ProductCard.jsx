@@ -5,44 +5,52 @@ import { Link } from "react-router";
 const ProductCard = ({ product }) => {
   return (
     <Link to={`/products/${product.id}`}>
-      <div className="card bg-white shadow-xs hover:border hover:border-blue-300 transition-shadow duration-300 flex-shrink-0 ">
-        <figure className=" ">
+      <div  className="card bg-white shadow-md hover:shadow-lg hover:border-blue-400 transition-shadow duration-300 flex-shrink-0 w-full h-[270px] rounded-xl border border-gray-100 relative">
+        <figure className="h-36 w-full overflow-hidden rounded-t-xl">
           <img
             src={product?.images?.at(-1)?.image}
-            alt="Basketball Jersey"
-            className=" h-36 w-full object-cover overflow-hidden"
+            alt="Product"
+            className="h-full w-full object-cover"
           />
-          <div className=" absolute top-3 right-3 border-none">
-            <span className="bg-red-200 text-orange-500 text-xs font-semibold px-1.5  py-0.5 rounded-full">
-              <FaTag className="inline text-xs" /> {product?.discount}% OFF
+          {product?.discount > 0 && (
+            <div className="absolute top-3 right-3">
+              <span className="bg-blue-100 text-blue-500 text-xs font-semibold px-2 py-1 rounded-full flex items-center gap-1">
+                <FaTag className="text-sm" /> {product?.discount}% OFF
+              </span>
+            </div>
+          )}
+        </figure>
+
+        <div className="card-body p-3 flex flex-col justify-between h-[calc(100%-144px)]">
+          {/* Title with fixed height */}
+          <h3 className="card-title text-gray-800 font-medium text-base leading-snug h-[40px] overflow-hidden line-clamp-2">
+            {product.name}
+          </h3>
+
+          {/* Rating */}
+          <div className="flex items-center gap-1 mt-1">
+            <div className="flex">
+              {[...Array(5)].map((_, i) =>
+                i < product.ratings ? (
+                  <RiStarFill key={i} className="text-yellow-600 w-4 h-4" />
+                ) : (
+                  <RiStarLine key={i} className="text-gray-300 w-4 h-4" />
+                )
+              )}
+            </div>
+            <span className="text-xs text-gray-500 ml-1">
+              ({product?.reviews?.length || 0})
             </span>
           </div>
-        </figure>
-        <div className="card-body pt-2 pb-05">
-          <h3 className="card-title text-lg text-gray-600 font-semibold">{product.name}</h3>
-          <div className="flex items-center mb-1">
-              <div className="flex mr-2">
-                {[...Array(5)].map((_, i) =>
-                  i < product.ratings ? (
-                    <RiStarFill key={i} className="text-yellow-400 w-5 h-5" />
-                  ) : (
-                    <RiStarLine key={i} className="text-gray-300 w-5 h-5" />
-                  )
-                )}
-              </div>
-              <span className="text-sm text-gray-500">
-                ({product?.reviews?.length || "0"})
-              </span>
-            </div>
-          <div className="mt-1 flex justify-between items-center">
-            <div className="flex items-center mb-0">
-              <p className="text-2xl font-extrabold text-blue-400">
-                BDT {product.final_price}
-              </p>
-              <span className="ml-2 text-md text-red-400 line-through">
-                {product.price}
-              </span>
-            </div>
+
+          {/* Price Section */}
+          <div className="mt-auto pt-3 flex justify-between items-center">
+            <p className="text-xl font-bold text-blue-400">
+              BDT {product.final_price}
+            </p>
+            <span className="text-sm text-gray-400 line-through">
+              {product.price}
+            </span>
           </div>
         </div>
       </div>

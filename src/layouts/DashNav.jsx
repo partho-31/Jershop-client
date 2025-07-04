@@ -35,11 +35,11 @@ const DashNav = ({ children }) => {
   }, []);
 
   return (
-    <div className="flex h-screen bg-gray-100 sticky top-0 overflow-hidden">
+    <div className="flex h-screen sticky top-0 overflow-hidden">
       {/* Mobile sidebar toggle button */}
       <button
         onClick={() => setSidebarOpen(!sidebarOpen)}
-        className="sm:hidden fixed top-5 left-4 z-50 bg-blue-600 text-white p-2 rounded-md"
+        className="sm:hidden fixed top-5 left-4 z-50 bg-blue-400 text-white p-2 rounded-md"
       >
         {sidebarOpen ? <FaTimes /> : <FaBars />}
       </button>
@@ -52,7 +52,7 @@ const DashNav = ({ children }) => {
             sidebarOpen ? "translate-x-0" : "-translate-x-full sm:translate-x-0"
           }`}
       >
-        <div className="p-4 text-center shadow-lg flex items-center justify-center  text-lg font-bold text-blue-400">
+        <div className="p-4 text-center shadow-lg flex items-center justify-center  text-md font-bold text-blue-400">
           <span className="text-3xl">G</span>
           <IoFootball size={40} /> <span className="text-3xl">lazo!</span>
         </div>
@@ -123,7 +123,7 @@ const DashNav = ({ children }) => {
         </header>
 
         {/* Scrollable Content */}
-        <main className="flex-1 overflow-auto p-4 bg-gray-50">
+        <main className="flex-1 overflow-auto p-4 bg-gray-100">
           {children || (
             <>
               <h2 className="text-xl font-semibold mb-4">Welcome Back!</h2>

@@ -16,7 +16,11 @@ const LatestProductCard = ({ product }) => {
   };
 
   return (
-    <div className="w-full max-w-5xl mt-10 mx-auto bg-white rounded-2xl shadow-2xl overflow-hidden transition-all duration-300 hover:shadow-3xl hover:-translate-y-1">
+    <div
+      data-aos="fade-right"
+      data-aos-delay="300"
+      className="w-full max-w-5xl mt-10 mx-auto bg-white rounded-2xl shadow-2xl overflow-hidden transition-all duration-300 hover:shadow-3xl hover:-translate-y-1"
+    >
       <div className="flex flex-col md:flex-row">
         {/* Product Image */}
         <div className="md:w-1/2 w-full h-60 md:h-auto relative">
@@ -30,9 +34,8 @@ const LatestProductCard = ({ product }) => {
         {/* Product Content */}
         <div className="md:w-1/2 w-full p-4 sm:p-8 flex flex-col justify-between bg-white">
           <div>
-
             {/* Product Title */}
-            <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-1 sm:mb-3">
+            <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-600 mb-1 sm:mb-3">
               {product.name}
             </h3>
 

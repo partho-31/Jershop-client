@@ -2,10 +2,10 @@ import { FaTruck, FaBox, FaReceipt } from "react-icons/fa";
 
 const OrderCard = ({ order }) => {
   return (
-    <div className="bg-white w-full max-w-4xl mx-auto rounded-xl shadow-sm overflow-hidden mb-6 px-4 sm:px-6 lg:px-8">
+    <div className="bg-white sm:w-3/4 mx-auto rounded-xl shadow-sm overflow-hidden mb-6 px-4 sm:px-6 lg:px-8">
       {/* Order Summary */}
       <div className="py-6">
-        <h2 className="text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
+        <h2 className="text-xl font-semibold text-gray-600 mb-4 flex items-center gap-2">
           <FaReceipt className="text-gray-500" /> Order Summary
         </h2>
 
@@ -14,7 +14,7 @@ const OrderCard = ({ order }) => {
             <div className="flex items-start gap-4" key={item.id}>
               <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gray-100 rounded-md overflow-hidden">
                 <img
-                  src={item.product.images?.[0].image}
+                  src={item.product.images?.at(-1).image}
                   alt="Product Img"
                   className="object-cover w-full h-full"
                 />

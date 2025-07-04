@@ -26,13 +26,13 @@ const AddProductForm = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen  py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-10">
-          <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+          <h2 className="text-3xl font-extrabold text-gray-600 sm:text-4xl">
             Add a new product
           </h2>
-          <p className="mt-3 text-xl text-gray-600">
+          <p className="mt-3 text-xl text-gray-400">
             Fill in the details to add a new product
           </p>
         </div>

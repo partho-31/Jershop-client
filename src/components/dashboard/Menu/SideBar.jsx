@@ -45,20 +45,22 @@ const SideBar = () => {
         </Link>
         
         {/* Add Category   */}
+        {user?.is_staff && (
         <Link to="addCategory">
           <div className="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-400">
             <IoMdAddCircleOutline className="text-xl" />
             <span>Add Categories</span>
           </div>
-        </Link>
+        </Link>)}
 
         {/* Add Products   */}
+        {user?.is_staff && (
         <Link to="products/add">
           <div className="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-400">
             <IoMdAddCircleOutline className="text-xl" />
             <span>Add Products</span>
           </div>
-        </Link>
+        </Link>)}
 
         {/* Orders History  */}
         <Link to="orders">
