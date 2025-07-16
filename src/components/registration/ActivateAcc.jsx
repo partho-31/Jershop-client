@@ -35,8 +35,8 @@ const {activeAccViaEmail} = useAuthContext()
 }, [uid, token, activeAccViaEmail, navigate]);
 
   return (
-    <>
-    </>
+    <div className="h-lvh">
+    </div>
   );
 };
 

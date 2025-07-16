@@ -20,7 +20,7 @@ const LoginPage = () => {
       password: "Password@12",
     });
   };
-  
+
   const handleUserLogin = () => {
     logIn({
       email: "64or02bp8g@xkxkud.com",
@@ -125,12 +125,21 @@ const LoginPage = () => {
                 <div className="text-white/70 flex justify-center gap-1">
                   Don't have an account?{" "}
                   <Link to="/registration">
-                    <p className="text-white hover:underline">
-                      Sign up
-                    </p>
+                    <p className="text-white hover:underline">Sign up</p>
                   </Link>
                 </div>
               </div>
+
+              <a href="https://jersey-shop-seven.vercel.app/rest-auth/google/google/login/">
+                <button className="w-full flex justify-center items-center py-2 bg-white/20 font-bold text-white rounded-lg hover:bg-white/30 transition duration-200">
+                  <img
+                    src="https://developers.google.com/identity/images/g-logo.png"
+                    alt="Google"
+                    className="w-4 h-4 mr-2 bg-transparent"
+                  />
+                  Continue with Google
+                </button>
+              </a>
             </div>
           </div>
         </div>
