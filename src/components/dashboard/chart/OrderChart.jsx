@@ -4,7 +4,6 @@ import AuthAPiClient from "../../../services/AuthApiClient";
 
 const OrderChart = () => {
   const [Overview, setOrderOverview] = useState(null);
-  console.log(Overview);
   useEffect(() => {
     const fetchSalesReport = async () => {
       try {

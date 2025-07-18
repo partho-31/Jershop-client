@@ -79,6 +79,16 @@ const useAuth = () => {
     }
   }, [authToken]);
 
+
+  const googleWithLogin = async () => {
+      try {
+        const response = await ApiClient.post('/rest-auth/google/login/')
+        console.log(response)
+      } catch (error) {
+        console.log(error)
+      }
+  }
+
   const logIn = async (data) => {
     setLoading(true);
     try {
@@ -199,6 +209,7 @@ const useAuth = () => {
     forgetPassword,
     deleteAccount,
     loading,
+    googleWithLogin,
   };
 };
 

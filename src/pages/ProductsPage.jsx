@@ -57,7 +57,6 @@ const ProductsPage = () => {
   setFilteredProducts(filtered);
 }, [minPrice, maxPrice, searchByCategory, searchByKeyword, productsList,ordering]);
 
-console.log(searchByCategory)
   return (
     <div className="flex flex-col md:flex-row gap-8 bg-gray-200 py-10">
       <div className="w-full md:w-72">

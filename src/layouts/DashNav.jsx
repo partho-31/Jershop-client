@@ -9,7 +9,7 @@ import { Link, Links } from "react-router";
 const DashNav = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const sidebarRef = useRef(null);
-  const { user } = useAuthContext();
+  const { user, logOut } = useAuthContext();
   const { cart, createOrGetCart } = useCartContext();
 
   useEffect(() => {
@@ -108,16 +108,31 @@ const DashNav = ({ children }) => {
               </div>
 
               {/* User Avatar Dropdown */}
-              <div className="h-10 w-10">
-                <div className="btn btn-ghost btn-circle avatar">
-                  <div className="w-10 border border-gray-400 rounded-full">
-                    <img
-                      alt="User avatar"
-                      src={`https://res.cloudinary.com/dvyz3blnz/${user?.image}`}
-                    />
-                  </div>
-                </div>
+              <div className="dropdown dropdown-end h-10 w-10">
+            <div tabIndex={0} className="btn btn-ghost btn-circle avatar">
+              <div className="w-10 border border-gray-400 rounded-full">
+                <img
+                  alt="User avatar"
+                  src={`https://res.cloudinary.com/dvyz3blnz/${user.image}`}
+                  className="w-10 h-10 object-contain"
+                />
               </div>
+            </div>
+            <ul
+              tabIndex={0}
+              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+            >
+              <Link to="/">
+                <li>
+                  <button className="justify-between">Home</button>
+                </li>{" "}
+              </Link>
+              
+              <li>
+                <button onClick={logOut}>Sign Out</button>
+              </li>
+            </ul>
+          </div>
             </div>
           </div>
         </header>

@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import useAuthContext from "../hooks/useAuthContext";
 import { Link } from "react-router";
+import GoogleLoginButton from "../components/registration/GoogleLoginButton";
 
 const LoginPage = () => {
   const {
@@ -130,16 +131,7 @@ const LoginPage = () => {
                 </div>
               </div>
 
-              <a href="https://jersey-shop-seven.vercel.app/rest-auth/google/google/login/">
-                <button className="w-full flex justify-center items-center py-2 bg-white/20 font-bold text-white rounded-lg hover:bg-white/30 transition duration-200">
-                  <img
-                    src="https://developers.google.com/identity/images/g-logo.png"
-                    alt="Google"
-                    className="w-4 h-4 mr-2 bg-transparent"
-                  />
-                  Continue with Google
-                </button>
-              </a>
+             <GoogleLoginButton/>
             </div>
           </div>
         </div>

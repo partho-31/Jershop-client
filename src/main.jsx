@@ -8,10 +8,13 @@ import { CartProvider } from "./contexts/CartContext.jsx";
 import { ProductsProvider } from "./contexts/ProductsContext.jsx";
 import { ToastContainer } from "react-toastify";
 import { CategoryProvider } from "./contexts/CategoryContext.jsx";
+import { GoogleOAuthProvider } from "@react-oauth/google";
+
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
+    <GoogleOAuthProvider clientId='1055881909624-6u5s1vm5aoglf5lh5ohvprua3tbn507t.apps.googleusercontent.com' >
       <AuthProvider>
         <CategoryProvider>
           <ProductsProvider>
@@ -27,7 +30,7 @@ createRoot(document.getElementById("root")).render(
             </CartProvider>
           </ProductsProvider>
         </CategoryProvider>
-      </AuthProvider>
+      </AuthProvider></GoogleOAuthProvider>
     </BrowserRouter>
   </StrictMode>
 );

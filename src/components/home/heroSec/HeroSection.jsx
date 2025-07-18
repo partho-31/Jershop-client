@@ -16,7 +16,7 @@ const HeroSection = () => {
       <div className="absolute inset-0 bg-black/60 z-0"></div>
 
       {/* Text Content - Left Side */}
-      <div className="relative z-10 flex items-center justify-center w-full lg:w-1/2 text-neutral-content py-10">
+      <div className="relative  z-10 flex items-center justify-center w-full lg:w-1/2 text-neutral-content py-10">
         <div className="max-w-2xl w-full text-center lg:text-left">
           <div className="badge badge-accent bg-teal-300 my-6 mx-auto lg:mx-0">
             NEW COLLECTION
