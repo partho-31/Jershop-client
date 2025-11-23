@@ -6,8 +6,6 @@ import { toast } from "react-toastify";
 const useProducts = () => {
   const [productsList, setProductsList] = useState([]);
   const [latestProducts, setLatestProducts] = useState([]);
-  const [hotDeals, setHotDeals] = useState([]);
-  const [popularPicks, setPopularPicks] = useState([]);
   const [loading, setLoading] = useState(false);
   const [searchByCategory, setSearchByCategory] = useState("");
   const [searchByKeyword, setSearchByKeyword] = useState("");
@@ -86,19 +84,11 @@ const useProducts = () => {
     }
   };
 
-  useEffect(() => {
-    const getProductsList = async () => {
+  const getProductsList = async () => {
       setLoading(true);
       try {
         const response = await ApiClient.get("/api/products/");
-        const fetchedProducts = response.data;
-        setHotDeals(
-          fetchedProducts.slice().sort((a, b) => b.discount - a.discount)
-        );
-        setPopularPicks(
-          fetchedProducts.slice().sort((a, b) => b.ratings - a.ratings)
-        );
-        setProductsList(fetchedProducts);
+        setProductsList(response.data);
       } catch (error) {
         return {
           success: false,
@@ -109,6 +99,9 @@ const useProducts = () => {
         setLoading(false);
       }
     };
+
+  useEffect(() => {
+    
     getProductsList();
     getLatestProducts();
   }, []);
@@ -127,8 +120,6 @@ const useProducts = () => {
     ordering,
     setOrdering,
     loading,
-    hotDeals,
-    popularPicks,
   };
 };
 

@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import { FiEdit } from "react-icons/fi";
 import { Link } from "react-router";
+import useAuthContext from "../../../hooks/useAuthContext";
 
 const ImageGallery = ({ images = [] }) => {
   const [mainImage, setMainImage] = useState(images[0]?.image);
+  const {user} = useAuthContext()
 
   useEffect(() => {
     if (images.length > 0) {
@@ -21,11 +23,12 @@ const ImageGallery = ({ images = [] }) => {
           className="w-full h-full object-fill transition-all duration-500 ease-in-out"
         />
 
+        { user?.is_staff &&
         <Link to="add-product_image">
           <div className="absolute bottom-4 right-4 bg-blue-400 p-2 rounded-full shadow-md hover:bg-blue-500 transition text-white">
             <FiEdit className="h-5 w-5" />
           </div>
-        </Link>
+        </Link> }
       </div>
 
       {/* Thumbnail Images */}

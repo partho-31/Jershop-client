@@ -4,7 +4,7 @@ import { Link } from "react-router";
 const HeroSection = () => {
   return (
     <section
-      className="relative flex flex-col lg:flex-row items-stretch justify-between gap-6 px-6 sm:px-14 h-lvh sm:h-[80lvh] overflow-hidden"
+      className="relative flex flex-col lg:flex-row items-stretch justify-between gap-6 px-6 sm:px-14 h-lvh sm:h-[90lvh]  overflow-hidden"
       style={{
         backgroundImage:
           "url('https://res.cloudinary.com/dinzf10l3/image/upload/v1751517821/510026_ybwhk9.jpg')",
@@ -59,8 +59,8 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Jersey Image - Right Side */}
-      <div className="relative z-10 hidden lg:block flex-1">
+      {/* Ronaldo Image - Right Side */}
+      <div className="relative z-10 pt-10 hidden lg:block flex-1">
         <img
           src="https://res.cloudinary.com/dinzf10l3/image/upload/v1751518137/new_cristiano_ronaldo_al_nassr_1695738518_89ac811d_progressive-removebg-preview_b7ipsl.png"
           alt="Authentic Football Jersey"

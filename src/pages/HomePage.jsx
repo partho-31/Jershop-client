@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import HeroSection from "../components/home/heroSec/HeroSection";
@@ -12,17 +12,20 @@ import useCategoryContext from "../hooks/useCategoryContext";
 import { Link } from "react-router";
 
 const HomePage = () => {
+  const { latestProducts, loading, productsList } = useProductsContext();
+  const { categories } = useCategoryContext();
+  const [hotDeals, setHotDeals] = useState([]);
+  const [popularPicks, setPopularPicks] = useState([]);
+
   useEffect(() => {
+    setHotDeals(productsList.slice().sort((a, b) => b.discount - a.discount));
+    setPopularPicks(productsList.slice().sort((a, b) => b.ratings - a.ratings));
     AOS.init({
       duration: 800,
       easing: "ease-in-out",
       once: false,
     });
-  }, []);
-
-  const { latestProducts, loading, hotDeals, popularPicks } =
-    useProductsContext();
-  const { categories } = useCategoryContext();
+  }, [productsList]);
 
   return (
     <div className="bg-gray-100">
