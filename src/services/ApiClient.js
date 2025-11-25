@@ -2,7 +2,7 @@ import axios from "axios";
 
 
 const ApiClient = axios.create({
-    baseURL: "https://jersey-shop-seven.vercel.app",
+    baseURL: "https://golazo-31.vercel.app",
 })
 
 export default ApiClient

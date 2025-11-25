@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const AuthAPiClient = axios.create({
-  baseURL: "https://jersey-shop-seven.vercel.app",
+  baseURL: "https://golazo-31.vercel.app",
 });
 
 AuthAPiClient.interceptors.request.use(
